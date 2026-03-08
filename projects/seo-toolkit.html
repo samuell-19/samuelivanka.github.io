@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Programmatic SEO Toolkit — Samuel Ivanka</title>
+  <meta name="description" content="A Python-based SEO toolkit that automates entity extraction, content gap analysis, schema auditing and GSC-enriched internal linking — using Google's own NLP infrastructure.">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://samuelivanka.github.io/projects/seo-toolkit.html">
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="article">
+  <meta property="og:url"         content="https://samuelivanka.github.io/projects/seo-toolkit.html">
+  <meta property="og:title"       content="Programmatic SEO Toolkit — Samuel Ivanka">
+  <meta property="og:description" content="Python toolkit automating entity extraction, gap analysis, schema auditing and GSC internal linking. Built on Google NLP. Zero subscriptions.">
+
+  <!--
+    Hreflang note:
+    This site uses a JavaScript-based language toggle (EN/DA) with localStorage persistence.
+    Both language versions are present in the DOM simultaneously; display:none hides the inactive one.
+  -->
+
+  <!-- Anti-FOUC: apply saved language before stylesheet renders -->
+  <script>(function(){var l=localStorage.getItem('si-lang')||'en';document.documentElement.classList.add('lang-'+l);document.documentElement.lang=l;}());</script>
+
+  <!-- Fonts preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+
+  <link rel="stylesheet" href="../style.css">
+
+  <!-- JSON-LD: SoftwareApplication -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Programmatic SEO Toolkit",
+    "url": "https://samuelivanka.github.io/projects/seo-toolkit.html",
+    "description": "A Python-based toolkit that automates entity extraction, content gap analysis, schema markup auditing and GSC-enriched internal linking for entity-based SEO. Built on Google's Natural Language API.",
+    "applicationCategory": "SEO Tool",
+    "programmingLanguage": ["Python"],
+    "operatingSystem": "Any",
+    "author": { "@id": "https://samuelivanka.github.io/#person" },
+    "featureList": [
+      "Entity extraction via Google NLP API",
+      "Content gap analysis against entity master list",
+      "JSON-LD schema auditing and generation",
+      "GSC-enriched internal linking recommendations"
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <!-- ===================== NAV ===================== -->
+  <div class="nav-wrapper">
+    <nav class="pill-nav" aria-label="Main navigation">
+      <a href="../index.html" class="nav-logo">Samuel Ivanka</a>
+
+      <button class="nav-hamburger" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <ul class="nav-links">
+        <li><a href="../index.html"><span class="t-en">Home</span><span class="t-da">Hjem</span></a></li>
+        <li><a href="../about.html"><span class="t-en">About</span><span class="t-da">Om mig</span></a></li>
+        <li><a href="../projects.html"><span class="t-en">Projects</span><span class="t-da">Projekter</span></a></li>
+        <li><a href="mailto:samuel.ivanka@gmail.com">Contact</a></li>
+      </ul>
+
+      <div class="lang-toggle">
+        <button class="lang-btn" data-lang="en" aria-label="Switch to English">EN</button>
+        <button class="lang-btn" data-lang="da" aria-label="Skift til dansk">DA</button>
+      </div>
+    </nav>
+  </div>
+
+  <main>
+
+    <!-- ===================== PAGE HEADER ===================== -->
+    <section class="page-header">
+      <div class="container">
+        <span class="label">Case Study</span>
+        <h1>
+          <span class="t-en">Programmatic SEO Toolkit</span>
+          <span class="t-da">Programmatisk SEO Toolkit</span>
+        </h1>
+        <p class="intro t-en">A Python-based toolkit that automates four technical SEO tasks: entity extraction, content gap analysis, schema markup auditing, and GSC-enriched internal linking.</p>
+        <p class="intro t-da">Et Python-baseret toolkit, der automatiserer fire tekniske SEO-opgaver: entitets-ekstraktion, content gap-analyse, auditering af schema-markup og GSC-beriget intern linkning.</p>
+      
+        <p class="intro t-en">The project was built to demonstrate practical understanding of how Google processes and evaluates web content, going beyond keyword-level optimisation to work at the entity and knowledge graph level (the layer that increasingly determines ranking outcomes).</p>
+        <p class="intro t-da">Projektet er udviklet for at demonstrere en praktisk forståelse af, hvordan Google processerer og evaluerer webindhold. Det går skridtet videre end blot søgeordsoptimering ved at arbejde på entitets- og Knowledge Graph-niveau (det lag, der i stigende grad afgør placeringerne i søgeresultaterne).</p>  
+      
+        <p class="intro t-en">This project targets iGaming industry, but can be obviously, with minor adjustments, used for any other industry.</p>
+        <p class="intro t-da">Projektet er målrettet iGaming-industrien, men kan selvfølgelig, med minimale justeringer, overføres til enhver anden branche.</p>
+      </div>
+    </section>
+
+    <!-- ===================== WHY I BUILT IT ===================== -->
+    <section>
+      <div class="container">
+        <div class="section-header fade-up">
+          <h2>
+            <span class="t-en">Why I built it</span>
+            <span class="t-da">Hvorfor jeg byggede det</span>
+          </h2>
+        </div>
+
+        <div style="max-width: 720px;">
+          <p class="t-en fade-up">Google has been shifting from keyword matching to entity understanding since the <a href="https://www.searchenginejournal.com/google-algorithm-history/hummingbird-update/">Hummingbird update (2013)</a> and accelerating with MUM and Gemini integrations. Tools that operate at the keyword level are increasingly insufficient for competitive SEO. This toolkit operates at the entity level — the same layer Google uses internally.</p>
+          <p class="t-da fade-up">Siden <a href="https://www.searchenginejournal.com/google-algorithm-history/hummingbird-update/">Hummingbird-opdateringen (2013)</a>har Google rykket sig fra søgeords-matching til entitets-forståelse. En udvikling, der er accelereret yderligere med MUM og Gemini-integrationer. Værktøjer, der kun opererer på søgeordsniveau, bliver i stigende grad utilstrækkelige i moderne, kompetitiv SEO. Dette toolkit arbejder på entitetsniveau – det samme lag, som Google selv bruger internt.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== THE PIPELINE ===================== -->
+    <section class="pipeline-section">
+      <div class="container">
+        <div class="section-header fade-up">
+          <span class="label">
+            <span class="t-en">How it works</span>
+            <span class="t-da">Sådan fungerer det</span>
+          </span>
+          <h2>
+            <span class="t-en">The pipeline</span>
+            <span class="t-da">Pipelinen</span>
+          </h2>
+        </div>
+
+        <div class="pipeline-full">
+
+          <article class="pipeline-step" data-delay="0">
+            <div class="pipeline-step-num">01</div>
+            <div>
+              <div class="pipeline-step-name">Entity Extractor</div>
+              <div class="pipeline-step-file">main.py</div>
+              <p class="pipeline-step-desc t-en">Crawls the target site with headless Chromium (via Playwright), extracts fully-rendered page text, and sends it to Google's Natural Language API. Returns named entities with salience scores — the same signals Google uses to understand your content.</p>
+              <p class="pipeline-step-desc t-da">Crawler målsitet med headless Chromium (via Playwright), udtrækker fuldt renderet sidetekst og sender den til Googles Natural Language API. Returnerer navngivne entiteter med salience scores — de samme signaler Google bruger til at forstå dit indhold.</p>
+              <div class="pipeline-step-meta">
+                <div class="meta-row">
+                  <span class="meta-label">Input</span>
+                  <span class="meta-value">Target domain URL</span>
+                </div>
+                <div class="meta-row">
+                  <span class="meta-label">API</span>
+                  <span class="meta-value">Google Natural Language API · Playwright / Chromium</span>
+                </div>
+                <div class="meta-row">
+                  <span class="meta-label">Output</span>
+                  <span class="meta-value">entity_report.csv</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="pipeline-step" data-delay="150">
+            <div class="pipeline-step-num">02</div>
+            <div>
+              <div class="pipeline-step-name">Gap Analyser</div>
+              <div class="pipeline-step-file">gap_analyser.py</div>
+              <p class="pipeline-step-desc t-en">Compares the site's entity profile against a pre-built master entity list of 80+ entities for the casino vertical. Flags missing entities and those that are under-represented by salience score — identifying exactly where topical authority is thin.</p>
+              <p class="pipeline-step-desc t-da">Sammenligner sitets entitetsprofil med en præbygget master-entitetsliste med 80+ entiteter for casino-vertikalen. Markerer manglende entiteter og dem der er underrepræsenteret ud fra salience score — og identificerer præcis hvor tematisk autoritet er svag.</p>
+              <div class="pipeline-step-meta">
+                <div class="meta-row">
+                  <span class="meta-label">Input</span>
+                  <span class="meta-value">entity_report.csv · master entity list (80+ casino entities)</span>
+                </div>
+                <div class="meta-row">
+                  <span class="meta-label">API</span>
+                  <span class="meta-value">—</span>
+                </div>
+                <div class="meta-row">
+                  <span class="meta-label">Output</span>
+                  <span class="meta-value">gap_report.csv</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="pipeline-step" data-delay="300">
+            <div class="pipeline-step-num">03</div>
+            <div>
+              <div class="pipeline-step-name">Schema Generator</div>
+              <div class="pipeline-step-file">schema_generator.py</div>
+              <p class="pipeline-step-desc t-en">Audits existing JSON-LD on each page, detects page type, and generates ready-to-paste schema markup with correct ordering — WebSite and Organization first, supporting types after. Google reads the first schema as the primary identity signal for that page.</p>
+              <p class="pipeline-step-desc t-da">Auditerer eksisterende JSON-LD på hver side, registrerer sidetype og genererer schema markup klar til indsætning med korrekt rækkefølge — WebSite og Organization først, understøttende typer bagefter. Google læser det første schema som det primære identitetssignal for siden.</p>
+              <div class="pipeline-step-meta">
+                <div class="meta-row">
+                  <span class="meta-label">Input</span>
+                  <span class="meta-value">Crawled page source (Playwright) · entity_report.csv</span>
+                </div>
+                <div class="meta-row">
+                  <span class="meta-label">API</span>
+                  <span class="meta-value">—</span>
+                </div>
+                <div class="meta-row">
+                  <span class="meta-label">Output</span>
+                  <span class="meta-value">schema_recommendations.csv</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="pipeline-step" data-delay="450">
+            <div class="pipeline-step-num">04</div>
+            <div>
+              <div class="pipeline-step-name">GSC Internal Linking</div>
+              <div class="pipeline-step-file">gsc_connector.py</div>
+              <p class="pipeline-step-desc t-en">Pulls 90 days of Google Search Console data via OAuth 2.0. Identifies pages ranking in positions 8–20 (page 2) as priority internal link targets — the pages closest to ranking on page 1. Uses real GSC queries as anchor text recommendations.</p>
+              <p class="pipeline-step-desc t-da">Henter 90 dages Google Search Console-data via OAuth 2.0. Identificerer sider der rangerer i position 8–20 (side 2) som prioriterede interne link-mål — de sider der er tættest på at rangere på side 1. Bruger rigtige GSC-forespørgsler som ankertekst-anbefalinger.</p>
+              <div class="pipeline-step-meta">
+                <div class="meta-row">
+                  <span class="meta-label">Input</span>
+                  <span class="meta-value">Target domain · OAuth credentials · gap_report.csv</span>
+                </div>
+                <div class="meta-row">
+                  <span class="meta-label">API</span>
+                  <span class="meta-value">Google Search Console API (OAuth 2.0)</span>
+                </div>
+                <div class="meta-row">
+                  <span class="meta-label">Output</span>
+                  <span class="meta-value">gsc_internal_links.csv</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== DESIGN DECISIONS ===================== -->
+    <section>
+      <div class="container">
+        <div class="section-header fade-up">
+          <span class="label">
+            <span class="t-en">Under the hood</span>
+            <span class="t-da">Under motorhjelmen</span>
+          </span>
+          <h2>
+            <span class="t-en">Why it works the way it does</span>
+            <span class="t-da">Hvorfor det fungerer som det gør</span>
+          </h2>
+        </div>
+
+        <div class="decisions-grid">
+
+          <div class="decision-block fade-up">
+            <h4>
+              <span class="t-en">Why Playwright, not requests?</span>
+              <span class="t-da">Hvorfor Playwright, ikke requests?</span>
+            </h4>
+            <p class="t-en">Most casino sites render content via JavaScript. A standard HTTP request returns only the HTML shell — not what Google or users actually see. Playwright launches a real Chromium browser and extracts fully-rendered page text. Same content, same extraction.</p>
+            <p class="t-da">De fleste casino-sites renderer indhold via JavaScript. En standard HTTP-forespørgsel returnerer kun HTML-skallen — ikke hvad Google eller brugere faktisk ser. Playwright starter en rigtig Chromium-browser og udtrækker fuldt renderet sidetekst. Samme indhold, samme udtrækning.</p>
+          </div>
+
+          <div class="decision-block fade-up">
+            <h4>
+              <span class="t-en">Why Google's own NLP API?</span>
+              <span class="t-da">Hvorfor Googles egen NLP API?</span>
+            </h4>
+            <p class="t-en">Strategic choice. Google uses this same infrastructure to process web content. Optimising for the entities it returns means optimising for the signals Google actually uses — not a proxy for them.</p>
+            <p class="t-da">Strategisk valg. Google bruger denne samme infrastruktur til at behandle webindhold. Optimering for de entiteter den returnerer betyder optimering for de signaler Google faktisk bruger — ikke en proxy for dem.</p>
+          </div>
+
+          <div class="decision-block fade-up">
+            <h4>
+              <span class="t-en">Why a pre-built entity list for gap analysis?</span>
+              <span class="t-da">Hvorfor en præbygget entitetsliste til gap-analyse?</span>
+            </h4>
+            <p class="t-en">The original design crawled competitors. It failed — geo-blocking and bot protection are aggressive in iGaming. The pre-built list is based on Google's Knowledge Graph associations for the casino vertical globally. More robust, no crawling infrastructure needed.</p>
+            <p class="t-da">Det oprindelige design crawlede konkurrenter. Det mislykkedes — geo-blokering og bot-beskyttelse er aggressiv i iGaming. Den præbyggede liste er baseret på Googles Knowledge Graph-associationer for casino-vertikalen globalt. Mere robust, ingen crawling-infrastruktur nødvendig.</p>
+          </div>
+
+          <div class="decision-block fade-up">
+            <h4>
+              <span class="t-en">Why does schema order matter?</span>
+              <span class="t-da">Hvorfor er schema-rækkefølge vigtig?</span>
+            </h4>
+            <p class="t-en">Google treats the first schema on a page as the primary signal for that page's identity. A homepage that leads with an Offer schema signals "this page is a promotional offer" — not "this is a brand." The toolkit enforces WebSite → Organization first, always.</p>
+            <p class="t-da">Google behandler det første schema på en side som det primære signal for sidens identitet. En hjemmeside der starter med et Offer-schema signalerer "denne side er et tilbud" — ikke "dette er et brand." Toolkittet håndhæver WebSite → Organization først, altid.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== LIMITATIONS ===================== -->
+    <section>
+      <div class="container">
+        <div class="section-header fade-up">
+          <span class="label">
+            <span class="t-en">Limitations</span>
+            <span class="t-da">Begrænsninger</span>
+          </span>
+          <h2>
+            <span class="t-en">What it doesn't do (yet)</span>
+            <span class="t-da">Hvad det ikke gør (endnu)</span>
+          </h2>
+        </div>
+
+        <div class="limitations-box fade-up">
+          <p class="t-en">The internal linking tool works best with 50+ crawled pages — at 30 pages the entity co-occurrence data is shallow. There's no search volume integration, so gap analysis prioritises by topical completeness rather than traffic opportunity. Schema auditing can't verify whether field values are accurate, only whether they exist. These are known limitations, not surprises — and they point directly to the next layer of development.</p>
+          <p class="t-da">Internt linking-værktøjet fungerer bedst med 50+ crawlede sider — ved 30 sider er entitets-co-occurrence-dataen overfladisk. Der er ingen søgevolumenintegration, så gap-analyse prioriterer efter tematisk fuldstændighed frem for trafikmulighed. Schema-audittering kan ikke verificere om feltværdier er nøjagtige, kun om de eksisterer. Dette er kendte begrænsninger, ikke overraskelser — og de peger direkte mod næste udviklingslag.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== ROADMAP ===================== -->
+    <section>
+      <div class="container">
+        <div class="section-header fade-up">
+          <span class="label">Roadmap</span>
+          <h2>
+            <span class="t-en">Future improvements</span>
+            <span class="t-da">Fremtidige forbedringer</span>
+          </h2>
+        </div>
+
+        <ul class="roadmap-list">
+          <li class="t-en fade-up">Search volume integration via DataForSEO or Ahrefs API</li>
+          <li class="t-da fade-up">Søgevolumenintegration via DataForSEO eller Ahrefs API</li>
+
+          <li class="t-en fade-up">Implementation verification — re-crawl source pages after links are added</li>
+          <li class="t-da fade-up">Implementeringsverificering — re-crawl kildesider efter links er tilføjet</li>
+
+          <li class="t-en fade-up">Historical tracking — snapshot entity salience and GSC positions over time</li>
+          <li class="t-da fade-up">Historisk sporing — snapshot entitetssalience og GSC-positioner over tid</li>
+
+          <li class="t-en fade-up">Pipeline orchestration for enterprise portfolio scale</li>
+          <li class="t-da fade-up">Pipeline-orkestrering til enterprise porteføljeskala</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===================== TECH STACK ===================== -->
+    <section>
+      <div class="container">
+        <div class="section-header fade-up">
+          <span class="label">
+            <span class="t-en">Built with</span>
+            <span class="t-da">Bygget med</span>
+          </span>
+          <h2>
+            <span class="t-en">Tech stack</span>
+            <span class="t-da">Tech stack</span>
+          </h2>
+        </div>
+
+        <div class="tech-badges fade-up">
+          <span class="tech-badge">Python 3.10+</span>
+          <span class="tech-badge">Playwright</span>
+          <span class="tech-badge">Google Cloud NLP API</span>
+          <span class="tech-badge">Google Search Console API</span>
+          <span class="tech-badge">OAuth 2.0</span>
+          <span class="tech-badge">JSON-LD</span>
+          <span class="tech-badge">Chromium (headless)</span>
+          <span class="tech-badge">CSV output</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== BACK CTA ===================== -->
+    <section style="padding: 2rem 0 var(--section-gap);">
+      <div class="container">
+        <a href="../projects.html" class="btn-secondary">
+          <span class="t-en">← Back to projects</span>
+          <span class="t-da">← Tilbage til projekter</span>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer>
+    <div class="container">
+      <span class="footer-name">Samuel Ivanka</span>
+      <span>
+        <span class="t-en">Copenhagen</span>
+        <span class="t-da">København</span>
+         · samuel.ivanka@gmail.com
+      </span>
+      <span class="footer-note t-en">Built with semantic HTML, JSON-LD schema and hreflang best practices — because SEO starts in the code.</span>
+      <span class="footer-note t-da">Bygget med semantisk HTML, JSON-LD schema og hreflang best practices — fordi SEO starter i koden.</span>
+    </div>
+  </footer>
+
+  <script src="../script.js"></script>
+</body>
+</html>

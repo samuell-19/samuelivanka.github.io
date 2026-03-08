@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en"
+  data-title-en="Redirect Mapper — Samuel Ivanka"
+  data-title-da="Redirect Mapper — Samuel Ivanka"
+  data-desc-en="An AI-augmented 301 redirect mapping tool that combines algorithmic URL matching with Claude-powered semantic reasoning — built for site migrations."
+  data-desc-da="Et AI-augmenteret 301 redirect-mapping værktøj der kombinerer algoritmisk URL-matching med Claude-drevet semantisk ræsonnering — bygget til site-migreringer.">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Redirect Mapper — Samuel Ivanka</title>
+  <meta name="description" content="An AI-augmented 301 redirect mapping tool that combines algorithmic URL matching with Claude-powered semantic reasoning — built for site migrations.">
+
+  <link rel="canonical" href="https://samuelivanka.github.io/projects/redirect-mapper.html">
+
+  <meta property="og:type"        content="article">
+  <meta property="og:url"         content="https://samuelivanka.github.io/projects/redirect-mapper.html">
+  <meta property="og:title"       content="Redirect Mapper — Samuel Ivanka">
+  <meta property="og:description" content="AI-augmented 301 redirect mapping for site migrations. Algorithmic baseline + Claude semantic reasoning. Built for SEOs who do things properly.">
+
+  <script>(function(){var l=localStorage.getItem('si-lang')||'en';document.documentElement.classList.add('lang-'+l);document.documentElement.lang=l;}());</script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+
+  <link rel="stylesheet" href="../style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Redirect Mapper",
+    "url": "https://samuelivanka.github.io/projects/redirect-mapper.html",
+    "description": "An AI-augmented 301 redirect mapping tool for site migrations. Combines Jaccard similarity scoring with Claude semantic reasoning to resolve URL mappings that string-matching alone cannot handle.",
+    "applicationCategory": "SEO Tool",
+    "programmingLanguage": ["JavaScript", "React"],
+    "operatingSystem": "Any (browser-based)",
+    "author": { "@id": "https://samuelivanka.github.io/#person" },
+    "featureList": [
+      "Algorithmic URL matching via Jaccard similarity",
+      "Claude AI semantic reasoning for low-confidence matches",
+      "Visual migration diff (matched / new pages / at-risk)",
+      "CSV export with confidence scores and method attribution",
+      "Root URL exact matching",
+      "New page detection with callout"
+    ]
+  }
+  </script>
+
+  <style>
+    /* ── Version comparison block (unique to this page) ── */
+    .version-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    @media (max-width: 700px) {
+      .version-grid { grid-template-columns: 1fr; }
+    }
+    .version-card {
+      border: 1px solid var(--border, #dde1ec);
+      border-radius: 12px;
+      overflow: hidden;
+      background: var(--white, #fff);
+    }
+    .version-card-head {
+      padding: 1rem 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      border-bottom: 1px solid var(--border, #dde1ec);
+    }
+    .version-card-head.v1 { background: #f2f4f9; }
+    .version-card-head.v2 { background: #e6f3f5; }
+    .version-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 500;
+      padding: 3px 10px;
+      border-radius: 20px;
+      letter-spacing: 0.5px;
+    }
+    .version-num.v1 { background: #1a2744; color: #fff; }
+    .version-num.v2 { background: #2a7d8c; color: #fff; }
+    .version-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      color: #1a2744;
+    }
+    .version-card-body { padding: 1.25rem; }
+    .version-steps {
+      list-style: none;
+      padding: 0; margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .version-steps li {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+      font-size: 14px;
+      line-height: 1.55;
+      color: #4a5568;
+    }
+    .step-ico {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: #8a95a8;
+      background: #f2f4f9;
+      padding: 3px 7px;
+      border-radius: 4px;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+    .step-ico.teal { background: #e6f3f5; color: #2a7d8c; }
+    .version-result {
+      margin-top: 1rem;
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      line-height: 1.5;
+    }
+    .version-result.v1 { background: #f2f4f9; color: #4a5568; }
+    .version-result.v2 { background: #e6f3f5; color: #2a7d8c; }
+
+    /* ── Diff panel explainer ── */
+    .diff-explainer {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    @media (max-width: 900px) {
+      .diff-explainer { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 500px) {
+      .diff-explainer { grid-template-columns: 1fr; }
+    }
+    .diff-card {
+      border-radius: 10px;
+      padding: 1.25rem;
+      border-top: 3px solid;
+    }
+    .diff-card.matched { border-top-color: #2a7d4f; background: #f4fbf7; }
+    .diff-card.newpages { border-top-color: #2a7d8c; background: #e6f3f5; }
+    .diff-card.atrisk { border-top-color: #c0392b; background: #fdf0ef; }
+    .diff-card.unmatched { border-top-color: #6b2fa0; background: #f5f0fa; }
+    .diff-card-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.5rem;
+    }
+    .diff-card.matched .diff-card-label { color: #2a7d4f; }
+    .diff-card.newpages .diff-card-label { color: #2a7d8c; }
+    .diff-card.atrisk .diff-card-label { color: #c0392b; }
+    .diff-card.unmatched .diff-card-label { color: #6b2fa0; }
+    .diff-card p { font-size: 13px; color: #4a5568; line-height: 1.55; margin: 0; }
+
+    /* ── Limitations list ── */
+    .limitations-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 0;
+    }
+    @media (max-width: 700px) {
+      .limitations-grid { grid-template-columns: 1fr; }
+    }
+    .limitation-item {
+      background: #fff;
+      border: 1px solid #dde1ec;
+      border-left: 3px solid #c0392b;
+      border-radius: 8px;
+      padding: 1.1rem 1.25rem;
+    }
+    .limitation-item h4 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: #1a2744;
+      margin-bottom: 0.4rem;
+    }
+    .limitation-item p {
+      font-size: 13px;
+      color: #4a5568;
+      line-height: 1.55;
+      margin: 0 0 0.6rem;
+    }
+    .limitation-fix {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: #2a7d8c;
+      background: #e6f3f5;
+      padding: 3px 8px;
+      border-radius: 4px;
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===================== NAV ===================== -->
+  <div class="nav-wrapper">
+    <nav class="pill-nav" aria-label="Main navigation">
+      <a href="../index.html" class="nav-logo">Samuel Ivanka</a>
+
+      <button class="nav-hamburger" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <ul class="nav-links">
+        <li><a href="../index.html"><span class="t-en">Home</span><span class="t-da">Hjem</span></a></li>
+        <li><a href="../about.html"><span class="t-en">About</span><span class="t-da">Om mig</span></a></li>
+        <li><a href="../projects.html"><span class="t-en">Projects</span><span class="t-da">Projekter</span></a></li>
+        <li><a href="mailto:samuel.ivanka@gmail.com">Contact</a></li>
+      </ul>
+
+      <div class="lang-toggle">
+        <button class="lang-btn" data-lang="en" aria-label="Switch to English">EN</button>
+        <button class="lang-btn" data-lang="da" aria-label="Skift til dansk">DA</button>
+      </div>
+    </nav>
+  </div>
+
+  <main>
+
+    <!-- ===================== PAGE HEADER ===================== -->
+    <section class="page-header">
+      <div class="container">
+        <span class="label">Tool</span>
+        <h1>
+          <span class="t-en">Redirect Mapper</span>
+          <span class="t-da">Redirect Mapper</span>
+        </h1>
+        <p class="intro t-en">A browser-based tool that automates 301 redirect mapping for site migrations — combining algorithmic URL similarity scoring with Claude AI semantic reasoning to resolve mappings that string-matching alone cannot handle.</p>
+        <p class="intro t-da">Et browserbaseret værktøj der automatiserer 301 redirect-mapping til site-migreringer — kombinerer algoritmisk URL-similaritetsscore med Claude AI-semantisk ræsonnering til at løse mappings, som strengmatchning alene ikke kan håndtere.</p>
+
+        <p class="intro t-en">The tool exists in two versions. V1 is fully algorithmic — no AI, no API key required. V2 takes the URLs that V1 couldn't confidently resolve and passes them to Claude for semantic reasoning. The difference between those two outputs is the honest answer to the question: when does AI actually add value?</p>
+        <p class="intro t-da">Værktøjet findes i to versioner. V1 er fuldt algoritmisk — ingen AI, ingen API-nøgle nødvendig. V2 tager de URL'er som V1 ikke kunne løse med sikkerhed og sender dem til Claude til semantisk ræsonnering. Forskellen mellem de to output er det ærlige svar på spørgsmålet: hvornår tilføjer AI faktisk værdi?</p>
+      </div>
+    </section>
+
+    <!-- ===================== LIVE TOOL ===================== -->
+    <section style="padding: 0 0 var(--section-gap);">
+      <div class="container">
+        <div class="section-header fade-up">
+          <span class="label">
+            <span class="t-en">Try it</span>
+            <span class="t-da">Prøv det</span>
+          </span>
+          <h2>
+            <span class="t-en">Live tool</span>
+            <span class="t-da">Live værktøj</span>
+          </h2>
+        </div>
+        <p class="t-en fade-up" style="max-width:680px; margin-bottom:1.5rem;">Use the tool directly below — no sign-up, no install. Hit <strong>⚡ load demo</strong> to run the pre-built migration scenario, or paste your own sitemaps. Click <strong>✦ Enhance with Claude</strong> to see V2 in action (uses the Anthropic API).</p>
+        <p class="t-da fade-up" style="max-width:680px; margin-bottom:1.5rem;">Brug værktøjet direkte nedenfor — ingen tilmelding, ingen installation. Tryk <strong>⚡ load demo</strong> for at køre det præbyggede migrationsscenarie, eller indsæt dine egne sitemaps. Klik <strong>✦ Enhance with Claude</strong> for at se V2 i aktion (bruger Anthropic API).</p>
+        <a href="https://redirect-mapper-ciwsudc1t-samuell-19s-projects.vercel.app" target="_blank" rel="noopener" class="fade-up" style="display:block; border-radius:12px; overflow:hidden; border:1px solid var(--border, #dde1ec); box-shadow: 0 4px 24px rgba(26,39,68,0.06);">
+          <img
+            src="../assets/redirect-mapper-screenshot.png"
+            alt="Redirect Mapper tool — upload sitemaps interface"
+            width="100%"
+            style="display:block; width:100%; height:auto;">
+        </a>
+        <p class="t-en" style="margin-top:0.75rem; font-size:13px; color:#8a95a8;">
+          <a href="https://redirect-mapper-ciwsudc1t-samuell-19s-projects.vercel.app" target="_blank" rel="noopener" style="color:#2a7d8c;">Open the live tool in a new tab →</a>
+        </p>
+        <p class="t-da" style="margin-top:0.75rem; font-size:13px; color:#8a95a8;">
+          <a href="https://redirect-mapper-ciwsudc1t-samuell-19s-projects.vercel.app" target="_blank" rel="noopener" style="color:#2a7d8c;">Åbn det live værktøj i en ny fane →</a>
+        </p>
+      </div>
+    </section>
+
+    <!-- ===================== WHY I BUILT IT ===================== -->
+    <section>
+      <div class="container">
+        <div class="section-header fade-up">
+          <h2>
+            <span class="t-en">Why I built it</span>
+            <span class="t-da">Hvorfor jeg byggede det</span>
+          </h2>
+        </div>
+        <div style="max-width:720px;">
+          <p class="t-en fade-up">Redirect mapping is one of those SEO tasks that looks simple on paper and falls apart in practice. You have an old sitemap, a new sitemap, and you need to match every old URL to its new destination before the site goes live — or risk losing rankings, backlink equity, and crawl budget to 404s. On large sites this means hundreds or thousands of rows matched by hand in a spreadsheet.</p>
+          <p class="t-da fade-up">Redirect-mapping er en af de SEO-opgaver der ser simple ud på papiret og falder fra hinanden i praksis. Du har et gammelt sitemap, et nyt sitemap, og du skal matche hver gammel URL til dens nye destination inden sitet går live — ellers risikerer du at miste placeringer, backlink-egenkapital og crawl-budget til 404-fejl. På store sites betyder det hundredvis eller tusindvis af rækker matchet manuelt i et regneark.</p>
+
+          <p class="t-en fade-up" style="margin-top:1rem;">The interesting problem is that URL slugs don't always reflect what a page is about after a migration. <code style="font-family:'JetBrains Mono',monospace;font-size:13px;background:#f2f4f9;padding:2px 6px;border-radius:4px;">/services/paid-advertising</code> becoming <code style="font-family:'JetBrains Mono',monospace;font-size:13px;background:#f2f4f9;padding:2px 6px;border-radius:4px;">/what-we-do/performance-ads</code> is obvious to a human but invisible to a string matcher. This is where AI earns its place — not replacing the algorithm, but handling the cases the algorithm flags as uncertain.</p>
+          <p class="t-da fade-up" style="margin-top:1rem;">Det interessante problem er at URL-slugs ikke altid afspejler hvad en side handler om efter en migrering. <code style="font-family:'JetBrains Mono',monospace;font-size:13px;background:#f2f4f9;padding:2px 6px;border-radius:4px;">/services/paid-advertising</code> der bliver <code style="font-family:'JetBrains Mono',monospace;font-size:13px;background:#f2f4f9;padding:2px 6px;border-radius:4px;">/what-we-do/performance-ads</code> er indlysende for et menneske men usynlig for en strengmatcher. Det er her AI tjener sin plads — ikke ved at erstatte algoritmen, men ved at håndtere de tilfælde algoritmen markerer som usikre.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== HOW IT WORKS ===================== -->
+    <section class="pipeline-section">
+      <div class="container">
+        <div class="section-header fade-up">
+          <span class="label">
+            <span class="t-en">How it works</span>
+            <span class="t-da">Sådan fungerer det</span>
+          </span>
+          <h2>
+            <span class="t-en">Two versions, one workflow</span>
+            <span class="t-da">To versioner, ét workflow</span>
+          </h2>
+        </div>
+
+        <div class="version-grid fade-up">
+
+          <!-- V1 -->
+          <div class="version-card">
+            <div class="version-card-head v1">
+              <span class="version-num v1">V1</span>
+              <span class="version-title">Algorithmic matching</span>
+            </div>
+            <div class="version-card-body">
+              <ul class="version-steps">
+                <li>
+                  <span class="step-ico">01</span>
+                  <div><strong>Parse both sitemaps</strong> — XML is read, all <code style="font-family:'JetBrains Mono',monospace;font-size:12px;">&lt;loc&gt;</code> URLs extracted into two lists.</div>
+                </li>
+                <li>
+                  <span class="step-ico">02</span>
+                  <div><strong>Root URL rule</strong> — if an old URL has no path (homepage), it is immediately matched to the new homepage at 100% confidence. No scoring needed.</div>
+                </li>
+                <li>
+                  <span class="step-ico">03</span>
+                  <div><strong>Tokenisation</strong> — each URL path is split into tokens on slashes, hyphens, and underscores. <code style="font-family:'JetBrains Mono',monospace;font-size:12px;">/blog/seo-tips-2024</code> becomes <code style="font-family:'JetBrains Mono',monospace;font-size:12px;">["blog","seo","tips","2024"]</code>.</div>
+                </li>
+                <li>
+                  <span class="step-ico">04</span>
+                  <div><strong>Jaccard similarity</strong> — for each old URL, every new URL is scored by the ratio of shared tokens to total unique tokens. Exact leaf-slug matches are boosted to 0.92.</div>
+                </li>
+                <li>
+                  <span class="step-ico">05</span>
+                  <div><strong>Confidence thresholds</strong> — score ≥ 0.75 = high, ≥ 0.40 = medium, below = low. Best match per old URL is kept regardless.</div>
+                </li>
+              </ul>
+              <div class="version-result v1">Works well for folder renames (/blog/ → /insights/) and identical slugs across paths. Struggles when both the folder and the slug change.</div>
+            </div>
+          </div>
+
+          <!-- V2 -->
+          <div class="version-card">
+            <div class="version-card-head v2">
+              <span class="version-num v2">V2</span>
+              <span class="version-title">Claude semantic reasoning</span>
+            </div>
+            <div class="version-card-body">
+              <ul class="version-steps">
+                <li>
+                  <span class="step-ico teal">01</span>
+                  <div><strong>Filter weak matches</strong> — only URLs with medium or low confidence from V1 are passed to Claude. High-confidence matches are kept as-is. No unnecessary API calls.</div>
+                </li>
+                <li>
+                  <span class="step-ico teal">02</span>
+                  <div><strong>Structured prompt</strong> — Claude receives the full list of available new URLs alongside each unresolved old URL and its current best guess, and is asked to reason semantically.</div>
+                </li>
+                <li>
+                  <span class="step-ico teal">03</span>
+                  <div><strong>Semantic resolution</strong> — Claude maps <code style="font-family:'JetBrains Mono',monospace;font-size:12px;">/about/mission</code> → <code style="font-family:'JetBrains Mono',monospace;font-size:12px;">/company/our-story</code> and <code style="font-family:'JetBrains Mono',monospace;font-size:12px;">/faq</code> → <code style="font-family:'JetBrains Mono',monospace;font-size:12px;">/help/common-questions</code> by understanding page intent, not string overlap.</div>
+                </li>
+                <li>
+                  <span class="step-ico teal">04</span>
+                  <div><strong>Reasoning output</strong> — each AI-resolved match includes a one-sentence explanation of why the match was made. Reviewable, auditable, not a black box.</div>
+                </li>
+                <li>
+                  <span class="step-ico teal">05</span>
+                  <div><strong>Method attribution</strong> — every row in the output is tagged <em>algo</em> or <em>claude</em> so you always know which engine made each call.</div>
+                </li>
+              </ul>
+              <div class="version-result v2">Resolves semantically renamed paths that V1 scores below 40%. The ✦ AI tag and reasoning column make every Claude decision reviewable.</div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Migration diff section -->
+        <div class="section-header fade-up" style="margin-top:3rem;">
+          <span class="label">
+            <span class="t-en">Beyond redirect mapping</span>
+            <span class="t-da">Ud over redirect-mapping</span>
+          </span>
+          <h2>
+            <span class="t-en">Migration diff panel</span>
+            <span class="t-da">Migrerings-diff panel</span>
+          </h2>
+        </div>
+
+        <p class="t-en fade-up" style="max-width:680px;">A redirect map only tells half the migration story. The diff panel surfaces the full picture — what's been matched, what's brand new, what's at risk of becoming a 404, and what has no equivalent at all in the new sitemap.</p>
+        <p class="t-da fade-up" style="max-width:680px;">Et redirect-map fortæller kun halvdelen af migreringens historie. Diff-panelet afslører det fulde billede — hvad der er matchet, hvad der er helt nyt, hvad der risikerer at blive en 404, og hvad der slet ikke har en pendant i det nye sitemap.</p>
+
+        <div class="diff-explainer fade-up">
+          <div class="diff-card matched">
+            <div class="diff-card-label">✓ Matched</div>
+            <p>All old URLs mapped to a new destination with medium or high confidence. These are ready to implement as 301s. Confidence score shown per row.</p>
+          </div>
+          <div class="diff-card newpages">
+            <div class="diff-card-label">+ New pages</div>
+            <p>URLs present in the new sitemap with no equivalent in the old one. These go live fresh — no redirect needed, but worth flagging for content planning.</p>
+          </div>
+          <div class="diff-card atrisk">
+            <div class="diff-card-label">⚠ At risk</div>
+            <p>Old URLs with low-confidence matches. These are the migration's danger zone — potential 404s, lost backlink equity, and crawl budget waste if missed.</p>
+          </div>
+          <div class="diff-card unmatched">
+            <div class="diff-card-label">✕ Unmatched</div>
+            <p>Old URLs with no viable match in the new sitemap. Each one needs a deliberate decision: omit entirely, redirect to the homepage, or consolidate into the closest existing page.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===================== DESIGN DECISIONS ===================== -->
+    <section>
+      <div class="container">
+        <div class="section-header fade-up">
+          <span class="label">
+            <span class="t-en">Under the hood</span>
+            <span class="t-da">Under motorhjelmen</span>
+          </span>
+          <h2>
+            <span class="t-en">Why it works the way it does</span>
+            <span class="t-da">Hvorfor det fungerer som det gør</span>
+          </h2>
+        </div>
+
+        <div class="decisions-grid">
+
+          <div class="decision-block fade-up">
+            <h4>
+              <span class="t-en">Why Jaccard similarity, not edit distance?</span>
+              <span class="t-da">Hvorfor Jaccard similaritet, ikke edit distance?</span>
+            </h4>
+            <p class="t-en">Edit distance (Levenshtein) compares character sequences — it would rank <code style="font-family:'JetBrains Mono',monospace;font-size:12px;">/blog/seo</code> as closer to <code style="font-family:'JetBrains Mono',monospace;font-size:12px;">/blag/seo</code> than to <code style="font-family:'JetBrains Mono',monospace;font-size:12px;">/insights/seo</code>, which is wrong for URL matching. Jaccard operates on token sets — it cares about which meaningful words are shared, not character position. Right tool for the job.</p>
+            <p class="t-da">Edit distance (Levenshtein) sammenligner tegnsekvenser — det ville rangere <code style="font-family:'JetBrains Mono',monospace;font-size:12px;">/blog/seo</code> som tættere på <code style="font-family:'JetBrains Mono',monospace;font-size:12px;">/blag/seo</code> end på <code style="font-family:'JetBrains Mono',monospace;font-size:12px;">/insights/seo</code>, hvilket er forkert for URL-matching. Jaccard opererer på token-sæt — det handler om hvilke meningsfulde ord der deles, ikke tegnposition. Rigtigt værktøj til jobbet.</p>
+          </div>
+
+          <div class="decision-block fade-up">
+            <h4>
+              <span class="t-en">Why only send weak matches to Claude?</span>
+              <span class="t-da">Hvorfor sende kun svage matches til Claude?</span>
+            </h4>
+            <p class="t-en">Sending every URL to Claude would be wasteful, slow, and expensive at scale — and unnecessary. If the algorithm is already 92% confident that <code style="font-family:'JetBrains Mono',monospace;font-size:12px;">/blog/seo-tips</code> maps to <code style="font-family:'JetBrains Mono',monospace;font-size:12px;">/insights/seo-tips</code>, there's no value in asking Claude to confirm it. AI is used surgically, on the cases that actually need it.</p>
+            <p class="t-da">At sende alle URL'er til Claude ville være spild, langsomt og dyrt i skala — og unødvendigt. Hvis algoritmen allerede er 92% sikker på at <code style="font-family:'JetBrains Mono',monospace;font-size:12px;">/blog/seo-tips</code> mapper til <code style="font-family:'JetBrains Mono',monospace;font-size:12px;">/insights/seo-tips</code>, er der ingen værdi i at bede Claude bekræfte det. AI bruges kirurgisk, på de tilfælde der faktisk har brug for det.</p>
+          </div>
+
+          <div class="decision-block fade-up">
+            <h4>
+              <span class="t-en">Why show the reasoning column?</span>
+              <span class="t-da">Hvorfor vise ræsonneringskolonnen?</span>
+            </h4>
+            <p class="t-en">An SEO using this in a real migration needs to be able to defend every redirect decision to a client or developer. A black-box "Claude said so" is not acceptable. The reasoning column makes every AI decision auditable — you can agree with it, override it, or use it to explain the recommendation. Trust requires transparency.</p>
+            <p class="t-da">En SEO der bruger dette i en rigtig migrering skal kunne forsvare enhver redirect-beslutning over for en klient eller udvikler. En black-box "Claude sagde det" er ikke acceptabelt. Ræsonneringskolonnen gør enhver AI-beslutning reviderbar — du kan acceptere den, tilsidesætte den eller bruge den til at forklare anbefalingen. Tillid kræver gennemsigtighed.</p>
+          </div>
+
+          <div class="decision-block fade-up">
+            <h4>
+              <span class="t-en">Why does the demo sitemap have intentionally hard cases?</span>
+              <span class="t-da">Hvorfor har demo-sitemappet bevidst svære tilfælde?</span>
+            </h4>
+            <p class="t-en">The demo isn't designed to make the tool look good — it's designed to show honestly where V1 breaks down and where V2 recovers. About 60% of URLs are simple folder renames that V1 handles fine. 25% are semantically renamed paths that V1 scores poorly but Claude resolves correctly. 15% are structural changes that V1 fails on entirely. That honest split is the actual demonstration.</p>
+            <p class="t-da">Demoen er ikke designet til at få værktøjet til at se godt ud — den er designet til ærligt at vise hvor V1 bryder ned og hvor V2 genopretter. Ca. 60% af URL'er er simple mappeombygninger som V1 håndterer fint. 25% er semantisk omdøbte stier som V1 scorer dårligt men Claude løser korrekt. 15% er strukturelle ændringer som V1 fejler helt på. Den ærlige fordeling er den faktiske demonstration.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== LIMITATIONS ===================== -->
+    <section>
+      <div class="container">
+        <div class="section-header fade-up">
+          <span class="label">
+            <span class="t-en">Limitations</span>
+            <span class="t-da">Begrænsninger</span>
+          </span>
+          <h2>
+            <span class="t-en">What it doesn't do (yet)</span>
+            <span class="t-da">Hvad det ikke gør (endnu)</span>
+          </h2>
+        </div>
+
+        <p class="t-en fade-up" style="max-width:680px; margin-bottom:1.5rem;">These are known limitations, not surprises. They're listed here because they point directly to what a production-grade version of this tool would need — and because SEOs who think carefully about migrations will notice them anyway.</p>
+        <p class="t-da fade-up" style="max-width:680px; margin-bottom:1.5rem;">Dette er kendte begrænsninger, ikke overraskelser. De er listet her fordi de peger direkte mod hvad en produktionsklar version af dette værktøj ville kræve — og fordi SEOs der tænker grundigt over migreringer alligevel vil bemærke dem.</p>
+
+        <div class="limitations-grid fade-up">
+
+          <div class="limitation-item">
+            <h4>URL-only matching — no content signal</h4>
+            <p>Both V1 and V2 reason purely from URL paths. Two pages could have completely different slugs but cover identical topics — this tool would miss that entirely. The gold standard is matching by actual page content: H1, meta description, body text.</p>
+            <span class="limitation-fix">fix → fetch pages via Firecrawl, pass content to Claude</span>
+          </div>
+
+          <div class="limitation-item">
+            <h4>No 1-to-many or many-to-1 mapping</h4>
+            <p>Real migrations often involve consolidations (3 thin pages merging into 1 pillar) or splits (1 page becoming multiple targeted pages). This tool assumes clean 1-to-1 mappings. Consolidation logic requires content-level analysis to determine which pages are topically redundant.</p>
+            <span class="limitation-fix">fix → content fetching + topic clustering step</span>
+          </div>
+
+          <div class="limitation-item">
+            <h4>Arbitrary confidence thresholds</h4>
+            <p>The thresholds used (≥ 0.75 = high, ≥ 0.40 = medium) are calibrated against the demo sitemaps, not validated against real migration data at scale. On messy real-world URLs with numeric IDs, parameters, or inconsistent naming, these thresholds may need tuning.</p>
+            <span class="limitation-fix">fix → threshold calibration against labelled migration datasets</span>
+          </div>
+
+          <div class="limitation-item">
+            <h4>No redirect chain detection</h4>
+            <p>If a site already has existing redirects and then runs a second migration, this tool could produce redirect chains (A → B → C) which waste crawl budget and slow page load. There is no lookup against existing redirect rules.</p>
+            <span class="limitation-fix">fix → existing redirect file input + chain resolver</span>
+          </div>
+
+          <div class="limitation-item">
+            <h4>Claude reasons from URL strings only</h4>
+            <p>Even in V2, Claude is making educated guesses based on the words in the URL path — not the actual page. For paths like <code style="font-family:'JetBrains Mono',monospace;font-size:12px;">/p/12847</code> or <code style="font-family:'JetBrains Mono',monospace;font-size:12px;">/en/cat/a/b/product-xyz</code>, there is nothing for Claude to reason from beyond the ID or slug fragment.</p>
+            <span class="limitation-fix">fix → page content as additional context in the prompt</span>
+          </div>
+
+          <div class="limitation-item">
+            <h4>Scale limit</h4>
+            <p>Pasting XML into a textarea and running live Claude API calls works well for sites up to a few hundred URLs. Enterprise sites with 50,000–500,000 URLs would need batch processing, async queuing, and a backend layer — none of which exist in this browser-based version.</p>
+            <span class="limitation-fix">fix → backend API + async batch processing</span>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== ROADMAP ===================== -->
+    <section>
+      <div class="container">
+        <div class="section-header fade-up">
+          <span class="label">Roadmap</span>
+          <h2>
+            <span class="t-en">What V3 would look like</span>
+            <span class="t-da">Hvad V3 ville se ud</span>
+          </h2>
+        </div>
+
+        <ul class="roadmap-list">
+          <li class="t-en fade-up">Content-based matching — fetch page text via Firecrawl, compare H1 + body semantically, not just URL tokens</li>
+          <li class="t-da fade-up">Indholdsbaseret matching — hent sidetekst via Firecrawl, sammenlign H1 + brødtekst semantisk, ikke kun URL-tokens</li>
+
+          <li class="t-en fade-up">Thin content detection — flag pages below a word count threshold as consolidation candidates, clustered by topic similarity</li>
+          <li class="t-da fade-up">Tyndt indhold-detektion — markér sider under en ordgrænse som konsolideringskandidater, grupperet efter emne-lighed</li>
+
+          <li class="t-en fade-up">Merge vs. redirect decision layer — Claude reads both pages and recommends: 301 redirect, canonical tag, content merge, or keep separate</li>
+          <li class="t-da fade-up">Fletning vs. redirect-beslutningslag — Claude læser begge sider og anbefaler: 301 redirect, canonical tag, indholdsfletning eller hold adskilt</li>
+
+          <li class="t-en fade-up">Redirect chain resolution — input existing .htaccess or redirect file, detect and flatten A → B → C chains before output</li>
+          <li class="t-da fade-up">Redirect-kædeløsning — input eksisterende .htaccess eller redirect-fil, registrer og fladgør A → B → C-kæder før output</li>
+
+          <li class="t-en fade-up">Backend batch processing for enterprise scale — async queuing, progress tracking, export to Google Sheets</li>
+          <li class="t-da fade-up">Backend batch-behandling til enterprise-skala — asynkron køing, fremgangssporing, eksport til Google Sheets</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===================== TECH STACK ===================== -->
+    <section>
+      <div class="container">
+        <div class="section-header fade-up">
+          <span class="label">
+            <span class="t-en">Built with</span>
+            <span class="t-da">Bygget med</span>
+          </span>
+          <h2>Tech stack</h2>
+        </div>
+
+        <div class="tech-badges fade-up">
+          <span class="tech-badge">React</span>
+          <span class="tech-badge">JavaScript (browser)</span>
+          <span class="tech-badge">Claude API (Sonnet)</span>
+          <span class="tech-badge">Jaccard similarity</span>
+          <span class="tech-badge">XML sitemap parsing</span>
+          <span class="tech-badge">CSV export</span>
+          <span class="tech-badge">DOMParser</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== BACK CTA ===================== -->
+    <section style="padding: 2rem 0 var(--section-gap);">
+      <div class="container">
+        <a href="../projects.html" class="btn-secondary">
+          <span class="t-en">← Back to projects</span>
+          <span class="t-da">← Tilbage til projekter</span>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer>
+    <div class="container">
+      <span class="footer-name">Samuel Ivanka</span>
+      <span>
+        <span class="t-en">Copenhagen</span>
+        <span class="t-da">København</span>
+         · samuel.ivanka@gmail.com
+      </span>
+      <span class="footer-note t-en">Built with semantic HTML, JSON-LD schema and hreflang best practices — because SEO starts in the code.</span>
+      <span class="footer-note t-da">Bygget med se

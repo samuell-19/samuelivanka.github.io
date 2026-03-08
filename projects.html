@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Projects — Samuel Ivanka</title>
+  <meta name="description" content="SEO projects by Samuel Ivanka — including a programmatic SEO toolkit built on Google's NLP infrastructure.">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://samuelivanka.github.io/projects.html">
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website">
+  <meta property="og:url"         content="https://samuelivanka.github.io/projects.html">
+  <meta property="og:title"       content="Projects — Samuel Ivanka">
+  <meta property="og:description" content="Things built, tested and learned from. A programmatic SEO toolkit using Google NLP API, Playwright and GSC data.">
+
+  <!--
+    Hreflang note:
+    This site uses a JavaScript-based language toggle (EN/DA) with localStorage persistence.
+    Both language versions are present in the DOM simultaneously; display:none hides the inactive one.
+  -->
+
+  <!-- Anti-FOUC: apply saved language before stylesheet renders -->
+  <script>(function(){var l=localStorage.getItem('si-lang')||'en';document.documentElement.classList.add('lang-'+l);document.documentElement.lang=l;}());</script>
+
+  <!-- Fonts preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+
+  <link rel="stylesheet" href="style.css">
+
+  <!-- JSON-LD: ItemList -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Samuel Ivanka — Projects",
+    "url": "https://samuelivanka.github.io/projects.html",
+    "author": { "@id": "https://samuelivanka.github.io/#person" },
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@type": "SoftwareApplication",
+          "name": "Programmatic SEO Toolkit",
+          "url": "https://samuelivanka.github.io/projects/seo-toolkit.html",
+          "description": "A Python toolkit that automates entity extraction, content gap analysis, schema markup auditing and GSC-enriched internal linking.",
+          "applicationCategory": "SEO Tool",
+          "programmingLanguage": "Python"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "item": {
+          "@type": "SoftwareApplication",
+          "name": "Redirect Mapper",
+          "url": "https://samuelivanka.github.io/projects/redirect-mapper.html",
+          "description": "An AI-augmented 301 redirect mapping tool for site migrations. Combines Jaccard similarity scoring with Claude semantic reasoning to resolve URL mappings that string-matching alone cannot handle.",
+          "applicationCategory": "SEO Tool",
+          "programmingLanguage": ["JavaScript", "React"]
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@type": "Service",
+          "name": "OutWithKidz.com — SEO Audit & Consultancy",
+          "url": "https://samuelivanka.github.io/projects/outwithkidz.html",
+          "description": "Full technical and on-page SEO audit for OutWithKidz.com, a family activities platform targeting families across the UK."
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "item": {
+          "@type": "SoftwareApplication",
+          "name": "Link Building Qualifier",
+          "url": "https://samuelivanka.github.io/projects/link-qualifier.html",
+          "description": "Upload a broker link list and Ahrefs CSV — automatic criteria scoring against DR, traffic and spam signals, Claude topical relevance analysis for borderline cases, ranked output with anchor text recommendations.",
+          "applicationCategory": "SEO Tool",
+          "programmingLanguage": "JavaScript"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 5,
+        "item": {
+          "@type": "SoftwareApplication",
+          "name": "Content Brief Generator",
+          "description": "Keyword in, Claude analyses top SERPs, structured content brief out — recommended H2s, entities to cover, related questions, word count target, and content angle. Runs entirely in browser via the Anthropic API.",
+          "applicationCategory": "SEO Tool",
+          "programmingLanguage": "JavaScript"
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <!-- ===================== NAV ===================== -->
+  <div class="nav-wrapper">
+    <nav class="pill-nav" aria-label="Main navigation">
+      <a href="index.html" class="nav-logo">Samuel Ivanka</a>
+
+      <button class="nav-hamburger" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <ul class="nav-links">
+        <li><a href="index.html"><span class="t-en">Home</span><span class="t-da">Hjem</span></a></li>
+        <li><a href="about.html"><span class="t-en">About</span><span class="t-da">Om mig</span></a></li>
+        <li><a href="projects.html"><span class="t-en">Projects</span><span class="t-da">Projekter</span></a></li>
+        <li><a href="mailto:samuel.ivanka@gmail.com">Contact</a></li>
+      </ul>
+
+      <div class="lang-toggle">
+        <button class="lang-btn" data-lang="en" aria-label="Switch to English">EN</button>
+        <button class="lang-btn" data-lang="da" aria-label="Skift til dansk">DA</button>
+      </div>
+    </nav>
+  </div>
+
+  <main>
+
+    <!-- ===================== PAGE HEADER ===================== -->
+    <section class="page-header">
+      <div class="container">
+        <span class="label">
+          <span class="t-en">Work</span>
+          <span class="t-da">Arbejde</span>
+        </span>
+        <h1>
+          <span class="t-en">Projects</span>
+          <span class="t-da">Projekter</span>
+        </h1>
+        <p class="intro t-en">Things I've built, tested and learned from. The toolkit below is a working proof of concept — not a polished product, but a genuine demonstration of how SEO tooling works under the hood.</p>
+        <p class="intro t-da">Ting jeg har bygget, testet og lært af. Toolkittet nedenfor er et fungerende proof of concept — ikke et poleret produkt, men en ægte demonstration af hvordan SEO-værktøjer fungerer under motorhjelmen.</p>
+      </div>
+    </section>
+
+    <!-- ===================== PROJECT LIST ===================== -->
+    <div class="container">
+      <div class="projects-list">
+
+        <!-- Feature card: Programmatic SEO Toolkit -->
+        <article class="feature-card fade-up">
+          <div class="project-tags">
+            <span class="tag tag-dark">Python</span>
+            <span class="tag tag-dark">Google NLP</span>
+            <span class="tag tag-dark">GSC API</span>
+            <span class="tag tag-dark">Playwright</span>
+          </div>
+
+          <h2>
+            <span class="t-en">Programmatic SEO Toolkit</span>
+            <span class="t-da">Programmatisk SEO Toolkit</span>
+          </h2>
+
+          <p class="t-en">A 4-tool Python pipeline that automates entity extraction, content gap analysis, schema markup auditing and GSC-enriched internal linking. Built on Google's own NLP infrastructure. Zero subscriptions.</p>
+          <p class="t-da">En 4-værktøjs Python-pipeline der automatiserer entitetsudtrækning, content gap-analyse, schema markup-audit og GSC-beriget intern linkbuilding. Bygget på Googles egen NLP-infrastruktur. Nul abonnementer.</p>
+
+          <!-- Mini pipeline inside feature card -->
+          <div class="mini-pipeline" role="img" aria-label="4-step pipeline diagram">
+            <div class="mini-step">
+              <div class="mini-step-dot">01</div>
+              <span class="mini-step-label">Entity Extractor</span>
+            </div>
+            <div class="mini-connector" aria-hidden="true"></div>
+            <div class="mini-step">
+              <div class="mini-step-dot">02</div>
+              <span class="mini-step-label">Gap Analyser</span>
+            </div>
+            <div class="mini-connector" aria-hidden="true"></div>
+            <div class="mini-step">
+              <div class="mini-step-dot">03</div>
+              <span class="mini-step-label">Schema Generator</span>
+            </div>
+            <div class="mini-connector" aria-hidden="true"></div>
+            <div class="mini-step">
+              <div class="mini-step-dot">04</div>
+              <span class="mini-step-label">GSC Linking</span>
+            </div>
+          </div>
+
+          <div class="feature-card-cta">
+            <a href="projects/seo-toolkit.html" class="btn-outline">
+              <span class="t-en">Read the full case →</span>
+              <span class="t-da">Læs hele casen →</span>
+            </a>
+          </div>
+        </article>
+
+        <!-- Feature card: Redirect Mapper -->
+        <article class="feature-card fade-up">
+          <div class="project-tags">
+            <span class="tag tag-dark">JavaScript</span>
+            <span class="tag tag-dark">React</span>
+            <span class="tag tag-dark">Claude API</span>
+            <span class="tag tag-dark">Jaccard Similarity</span>
+          </div>
+
+          <h2>
+            <span class="t-en">Redirect Mapper</span>
+            <span class="t-da">Redirect Mapper</span>
+          </h2>
+
+          <p class="t-en">A browser-based tool that automates 301 redirect mapping for site migrations — combining algorithmic Jaccard similarity scoring with Claude AI semantic reasoning to resolve URL mappings that string-matching alone cannot handle.</p>
+          <p class="t-da">Et browserbaseret værktøj der automatiserer 301 redirect-mapping til site-migreringer — kombinerer algoritmisk Jaccard similaritetsscore med Claude AI-semantisk ræsonnering til at løse URL-mappings som strengmatchning alene ikke kan håndtere.</p>
+
+          <div class="feature-card-cta">
+            <a href="projects/redirect-mapper.html" class="btn-outline">
+              <span class="t-en">Read the full case →</span>
+              <span class="t-da">Læs hele casen →</span>
+            </a>
+          </div>
+        </article>
+
+        <!-- Feature card: OutWithKidz -->
+        <article class="feature-card fade-up">
+          <div class="project-tags">
+            <span class="tag tag-dark">Technical SEO</span>
+            <span class="tag tag-dark">On-page SEO</span>
+            <span class="tag tag-dark">Schema Markup</span>
+            <span class="tag tag-dark">Freelance</span>
+          </div>
+
+          <h2>
+            <span class="t-en">OutWithKidz.com — SEO Consultancy</span>
+            <span class="t-da">OutWithKidz.com — SEO-rådgivning</span>
+          </h2>
+
+          <p class="t-en">Ongoing SEO consultancy for a UK family activities platform — defining the strategy, explaining the reasoning, and advising on priorities. Organic traffic grew from near zero to 800+ monthly visits and 300+ ranking keywords within a year.</p>
+          <p class="t-da">Løbende SEO-rådgivning for en britisk familieaktivitetsplatform — strategidefinition, forklaring af begrundelserne og prioriteringsrådgivning. Organisk trafik voksede fra næsten nul til 800+ månedlige besøg og 300+ rankende søgeord på et år.</p>
+
+          <div class="feature-card-cta">
+            <a href="projects/outwithkidz.html" class="btn-outline">
+              <span class="t-en">Read the full case →</span>
+              <span class="t-da">Læs hele casen →</span>
+            </a>
+          </div>
+        </article>
+
+        <!-- Feature card: Link Building Qualifier -->
+        <article class="feature-card fade-up">
+          <div class="project-tags">
+            <span class="tag tag-dark">JavaScript</span>
+            <span class="tag tag-dark">Claude API</span>
+            <span class="tag tag-dark">Ahrefs CSV</span>
+            <span class="tag tag-dark">iGaming SEO</span>
+          </div>
+
+          <h2>
+            <span class="t-en">Link Building Qualifier</span>
+            <span class="t-da">Link Building Qualifier</span>
+          </h2>
+
+          <p class="t-en">Upload a broker link list alongside an Ahrefs metrics CSV and the tool does the qualification work automatically — scoring each prospect against DR, traffic, spam, and niche-fit criteria, then passing borderline cases to Claude for topical relevance analysis. Output is a ranked list with recommended anchor text per domain. Built from four years of iGaming link building, where distinguishing a genuinely relevant placement from a PBN in a thin vertical is the actual skill.</p>
+          <p class="t-da">Upload en broker-linkliste ved siden af en Ahrefs metrics CSV og værktøjet udfører kvalifikationsarbejdet automatisk — scorer hvert prospekt mod DR-, trafik-, spam- og nichefit-kriterier, og sender derefter grænsetilfælde til Claude til topisk relevanseanalyse. Output er en rangeret liste med anbefalet ankertekst per domæne. Bygget på fire års iGaming linkbuilding, hvor evnen til at skelne en genuint relevant placering fra en PBN i en tynd vertikal er den egentlige kompetence.</p>
+
+          <div class="feature-card-cta">
+            <a href="projects/link-qualifier.html" class="btn-outline">
+              <span class="t-en">Read the full case →</span>
+              <span class="t-da">Læs hele casen →</span>
+            </a>
+          </div>
+        </article>
+
+        <!-- Upcoming: Content Brief Generator -->
+        <article class="placeholder-card fade-up">
+          <span class="coming-soon-badge">
+            <span class="t-en">Upcoming</span>
+            <span class="t-da">Kommer snart</span>
+          </span>
+
+          <div class="project-tags">
+            <span class="tag tag-muted">JavaScript</span>
+            <span class="tag tag-muted">Claude API</span>
+            <span class="tag tag-muted">SERP Analysis</span>
+          </div>
+
+          <h2>
+            <span class="t-en">Content Brief Generator</span>
+            <span class="t-da">Content Brief Generator</span>
+          </h2>
+
+          <p class="t-en">Enter a keyword and the tool analyses the top-ranking SERPs, then outputs a structured content brief — recommended H2s, entities to cover, related questions to answer, a word count target, and a suggested content angle. Runs entirely in the browser via the Anthropic API. No subscriptions, no dashboards — just the brief an SEO would write, generated in seconds.</p>
+          <p class="t-da">Indtast et søgeord og værktøjet analyserer de toprangerende SERP'er, og genererer derefter en struktureret content brief — anbefalede H2'er, entiteter der skal dækkes, relaterede spørgsmål at besvare, et ordantal-mål og en foreslået content-vinkel. Kører udelukkende i browseren via Anthropic API. Ingen abonnementer, ingen dashboards — blot den brief en SEO ville skrive, genereret på sekunder.</p>
+        </article>
+
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer>
+    <div class="container">
+      <span class="footer-name">Samuel Ivanka</span>
+      <span>
+        <span class="t-en">Copenhagen</span>
+        <span class="t-da">København</span>
+         · samuel.ivanka@gmail.com
+      </span>
+      <span class="footer-note t-en">Built with semantic HTML, JSON-LD schema and hreflang best practices — because SEO starts in the code.</span>
+      <span class="footer-note t-da">Bygget med semantisk HTML, JSON-LD schema og hreflang best practices — fordi SEO starter i koden.</span>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

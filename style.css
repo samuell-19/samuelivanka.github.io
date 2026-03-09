@@ -45,6 +45,7 @@ body {
   font-family: var(--font-body);
   color: var(--ink);
   background: var(--white);
+  overflow-x: hidden;
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
 }
@@ -1192,4 +1193,11 @@ main p a:hover { color: var(--navy); }
   .timeline-dot { top: 0.05rem; left: 0; }
 
   footer .container { gap: 0.4rem 1rem; }
+}
+
+@media (max-width: 480px) {
+  .container { padding: 0 1rem; }
+  .feature-card { padding: 1.5rem 1.25rem; }
+  .placeholder-card { padding: 1.5rem 1.25rem; }
+  .page-header .container { padding-top: 2rem; padding-bottom: 2rem; }
 }

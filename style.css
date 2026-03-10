@@ -1117,7 +1117,11 @@ main p a:hover { color: var(--navy); }
 }
 
 @media (max-width: 768px) {
-  :root { --section-gap: 2.5rem; }
+  :root { --section-gap: 2rem; }
+
+  .hero { padding: 4rem 0 2.5rem; }
+  .page-header { padding: 4rem 0 2rem; }
+  .about-intro, .personal-intro { padding: 2.5rem 0 1.5rem; }
 
   .pipeline-step {
     grid-template-columns: 1fr;
@@ -1198,12 +1202,17 @@ main p a:hover { color: var(--navy); }
 }
 
 @media (max-width: 480px) {
+  :root { --section-gap: 1.5rem; }
+
   .container { padding: 0 1rem; }
+  .hero { padding: 3rem 0 2rem; }
+  .page-header { padding: 3rem 0 1.5rem; }
+  .about-intro, .personal-intro { padding: 2rem 0 1rem; }
   .feature-card { padding: 1.5rem 1.25rem; }
   .placeholder-card { padding: 1.5rem 1.25rem; }
-  .page-header .container { padding-top: 2rem; padding-bottom: 2rem; }
   .mini-pipeline { max-width: 100%; }
   h1, h2, h3 { overflow-wrap: break-word; word-break: break-word; }
+  .section-header { margin-bottom: 1.25rem; }
 
   /* Badges: drop absolute positioning so they don't overlap the tag pills */
   .coming-soon-badge,
@@ -1211,5 +1220,27 @@ main p a:hover { color: var(--navy); }
     position: static;
     display: inline-block;
     margin-bottom: 0.75rem;
+  }
+}
+
+/* ---- Scroll hint (mobile hero only) ---- */
+.scroll-hint {
+  display: none;
+}
+
+@keyframes bounce-down {
+  0%, 100% { transform: translateY(0);   opacity: 0.5; }
+  50%       { transform: translateY(6px); opacity: 1;   }
+}
+
+@media (max-width: 768px) {
+  .scroll-hint {
+    display: block;
+    margin-top: 1.75rem;
+    text-align: center;
+    font-size: 1.25rem;
+    color: var(--muted);
+    animation: bounce-down 1.6s ease-in-out infinite;
+    user-select: none;
   }
 }

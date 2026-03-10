@@ -1204,4 +1204,12 @@ main p a:hover { color: var(--navy); }
   .page-header .container { padding-top: 2rem; padding-bottom: 2rem; }
   .mini-pipeline { max-width: 100%; }
   h1, h2, h3 { overflow-wrap: break-word; word-break: break-word; }
+
+  /* Badges: drop absolute positioning so they don't overlap the tag pills */
+  .coming-soon-badge,
+  .working-on-badge {
+    position: static;
+    display: inline-block;
+    margin-bottom: 0.75rem;
+  }
 }

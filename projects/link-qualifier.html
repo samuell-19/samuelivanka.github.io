@@ -12,10 +12,7 @@
   <meta name="description" lnag="en"    content="A browser-based tool that scores link building prospects from Ahrefs exports — algorithmic scoring plus a Claude AI layer, built from 5+ years of iGaming SEO experience.">
   <meta name="description" lang="da" content="Et browserbaseret værktøj, der scorer domæner fra Ahrefs eksporter — algoritmisk scoring kombineret med et Claude AI-lag, bygget på 5+ års iGaming SEO-erfaring.">
 
-  <link rel="canonical"    href="https://samuelivanka.github.io/projects/link-qualifier.html">
-  <link rel="alternate" hreflang="en"      href="https://samuelivanka.github.io/projects/link-qualifier.html">
-  <link rel="alternate" hreflang="da"      href="https://samuelivanka.github.io/projects/link-qualifier.html">
-  <link rel="alternate" hreflang="x-default" href="https://samuelivanka.github.io/projects/link-qualifier.html">
+  <link rel="canonical" href="https://samuelivanka.github.io/projects/link-qualifier.html">
 
   <meta property="og:type"        content="article">
   <meta property="og:url"         content="https://samuelivanka.github.io/projects/link-qualifier.html">
@@ -526,23 +523,29 @@
               <tr>
                 <td><strong><span class="t-en">Traffic trend (6 months)</span><span class="t-da">Trafiktrendanalyse (6 måneder)</span></strong></td>
                 <td><span class="status-pill pill-manual">! Manual check</span></td>
-                <td class="t-en">Historical data would require Ahrefs MCP connection — verify in Ahrefs for shortlisted domains only</td>
-                <td class="t-da">Historiske data kræver Ahrefs MCP forbindelse — verificer i Ahrefs kun for shortlistede domæner</td>
+                <td class="t-en">Requires Ahrefs MCP connection — verify in Ahrefs for shortlisted domains only</td>
+                <td class="t-da">Kræver Ahrefs MCP-forbindelse — verificer i Ahrefs kun for shortlistede domæner</td>
+              </tr>
+              <tr>
+                <td><strong><span class="t-en">Keyword ranking trend</span><span class="t-da">Søgeordsrankering-trend</span></strong></td>
+                <td><span class="status-pill pill-manual">! Manual check</span></td>
+                <td class="t-en">Whether the site's organic keyword count is growing or shrinking — a declining keyword profile is a strong signal of a penalised or abandoned site. Requires Ahrefs MCP connection to check programmatically.</td>
+                <td class="t-da">Om sitets organiske søgeordsantal vokser eller skrumper — en faldende søgeordsprofil er et stærkt signal om et straffet eller forladt site. Kræver Ahrefs MCP-forbindelse for programmatisk tjek.</td>
               </tr>
               <tr>
                 <td><strong><span class="t-en">Prior link to destination</span><span class="t-da">Tidligere link til destination</span></strong></td>
                 <td><span class="status-pill pill-manual">! Manual check</span></td>
                 <td class="t-en">Cannot query backlinks programmatically without MCP connection — check manually for approved domains</td>
-                <td class="t-da">Kan ikke forespørge backlinks programmatisk uden MCP forbindelse  — tjek manuelt for godkendte domæner</td>
+                <td class="t-da">Kan ikke forespørge backlinks programmatisk uden MCP-forbindelse — tjek manuelt for godkendte domæner</td>
               </tr>
             </tbody>
           </table>
         </div>
 
         <div class="callout-note amber fade-up">
-          <strong><span class="t-en">On the two blind spots:</span><span class="t-da">Om de to blinde vinkler:</span></strong>
-          <span class="t-en"> In practice, traffic trend and prior link checks only matter for domains that survive the hard filters — typically 3–5 out of 20. Verifying those manually takes under 5 minutes. The tool's job is to eliminate the obvious rejects so that manual effort is spent only where it counts.</span>
-          <span class="t-da"> I praksis er trafiktrendtjek og prior link-tjek kun relevante for domæner, der overlever de hårde filtre — typisk 3–5 ud af 20. At verificere disse manuelt tager under 5 minutter. Værktøjets opgave er at eliminere de åbenlyse afvisninger, så manuel indsats kun bruges, hvor det tæller.</span>
+          <strong><span class="t-en">On the three manual checks:</span><span class="t-da">Om de tre manuelle tjek:</span></strong>
+          <span class="t-en"> Traffic trend, keyword ranking trend, and prior link checks only matter for domains that survive the hard filters — typically 3–5 out of 20. Verifying those manually takes under 5 minutes. The tool's job is to eliminate the obvious rejects so that manual effort is spent only where it counts.</span>
+          <span class="t-da"> Trafik-trend, søgeordsrankering-trend og prior link-tjek er kun relevante for domæner, der overlever de hårde filtre — typisk 3–5 ud af 20. At verificere disse manuelt tager under 5 minutter. Værktøjets opgave er at eliminere de åbenlyse afvisninger, så manuel indsats kun bruges, hvor det tæller.</span>
         </div>
 
       </div>
@@ -661,6 +664,7 @@
             <p class="t-da">En live Ahrefs-forbindelse via MCP ville erstatte det statiske CSV-eksport med realtidsdata og lukke de to tjek, der i øjeblikket kræver manuel verifikation. Kræver et Ahrefs Enterprise-abonnement — ikke aktivt under udvikling.</p>
             <ul class="version-list">
               <li><span class="t-en">6-month traffic trend — catch recovering and collapsing sites</span><span class="t-da">6-månederstrend — fang genoprettende og kollapsende sites</span></li>
+              <li><span class="t-en">Keyword ranking trend — flag shrinking keyword profiles before ordering</span><span class="t-da">Søgeordsrankering-trend — markér skrumpende søgeordsprofiler inden bestilling</span></li>
               <li><span class="t-en">Prior link check — instantly flag existing placements</span><span class="t-da">Prior link-tjek — markér øjeblikkeligt eksisterende placeringer</span></li>
               <li><span class="t-en">Anchor text distribution — avoid over-optimised profiles</span><span class="t-da">Anchor text-distribution — undgå over-optimerede profiler</span></li>
               <li><span class="t-en">Real keyword data for Claude's topical analysis</span><span class="t-da">Rigtige søgeordsdata til Claudes topical analyse</span></li>

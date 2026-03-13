@@ -1,22 +1,29 @@
 <!DOCTYPE html>
 <html lang="en"
-  data-title-en="Redirect Mapper — Samuel Ivanka"
-  data-title-da="Redirect Mapper — Samuel Ivanka"
-  data-desc-en="An AI-augmented 301 redirect mapping tool that combines algorithmic URL matching with Claude-powered semantic reasoning — built for site migrations."
-  data-desc-da="Et AI-augmenteret 301 redirect-mapping værktøj der kombinerer algoritmisk URL-matching med Claude-drevet semantisk ræsonnering — bygget til site-migreringer.">
+  data-title-en="Redirect Mapper — 301 mapping for site migrations"
+  data-title-da="Redirect Mapper — 301-mapping til site-migreringer"
+  data-desc-en="A browser-based 301 redirect mapping tool — Jaccard similarity scoring plus Claude AI semantic reasoning for the URLs that string-matching can't resolve."
+  data-desc-da="Et browserbaseret 301 redirect-mapping værktøj — Jaccard similarity-score kombineret med Claude AI-semantisk ræsonnering til URL'er strengmatchning ikke kan løse.">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Redirect Mapper — Samuel Ivanka</title>
-  <meta name="description" content="An AI-augmented 301 redirect mapping tool that combines algorithmic URL matching with Claude-powered semantic reasoning — built for site migrations.">
+  <title>Redirect Mapper — 301 mapping for site migrations</title>
+  <meta name="description" lang="en" content="A browser-based 301 redirect mapping tool — Jaccard similarity scoring plus Claude AI semantic reasoning for the URLs that string-matching can't resolve.">
+  <meta name="description" lang="da" content="Et browserbaseret 301 redirect-mapping værktøj — Jaccard similarity-score kombineret med Claude AI-semantisk ræsonnering til URL'er strengmatchning ikke kan løse.">
 
   <link rel="canonical" href="https://samuelivanka.github.io/projects/redirect-mapper.html">
 
   <meta property="og:type"        content="article">
   <meta property="og:url"         content="https://samuelivanka.github.io/projects/redirect-mapper.html">
-  <meta property="og:title"       content="Redirect Mapper — Samuel Ivanka">
-  <meta property="og:description" content="AI-augmented 301 redirect mapping for site migrations. Algorithmic baseline + Claude semantic reasoning. Built for SEOs who do things properly.">
+  <meta property="og:title"       content="Redirect Mapper — 301 mapping for site migrations">
+  <meta property="og:description" content="Jaccard similarity + Claude AI semantic reasoning for 301 redirect mapping. Algorithmic baseline for clean renames, AI for the semantically renamed paths. Built for SEO migrations.">
+  <meta property="og:locale"             content="en_GB">
+  <meta property="og:locale:alternate"   content="da_DK">
+
+  <meta name="twitter:card"        content="summary">
+  <meta name="twitter:title"       content="Redirect Mapper — 301 mapping for site migrations">
+  <meta name="twitter:description" content="Jaccard similarity + Claude AI for 301 redirect mapping during site migrations. V1 algorithmic, V2 AI-enhanced. Method attribution on every row.">
 
   <script>(function(){var l=localStorage.getItem('si-lang')||'en';document.documentElement.classList.add('lang-'+l);document.documentElement.lang=l;}());</script>
 
@@ -38,18 +45,22 @@
     "operatingSystem": "Any (browser-based)",
     "author": { "@id": "https://samuelivanka.github.io/#person" },
     "featureList": [
-      "Algorithmic URL matching via Jaccard similarity",
-      "Claude AI semantic reasoning for low-confidence matches",
-      "Visual migration diff (matched / new pages / at-risk)",
-      "CSV export with confidence scores and method attribution",
-      "Root URL exact matching",
-      "New page detection with callout"
+      "Algorithmic URL matching via Jaccard similarity with leaf-slug penalty",
+      "Synonym-aware matching (contact / contact-us, faq / common-questions, etc.)",
+      "Claude AI semantic reasoning for low-confidence and unmatched URLs",
+      "Five confidence tiers: high, medium, low, consolidate, unmatched",
+      "Consolidate tier — best-available redirect with advisory to create new page",
+      "Visual migration diff (matched / new pages / at-risk / unmatched)",
+      "AI reasoning column — every Claude decision is auditable",
+      "Method attribution — algo vs claude tagged per row",
+      "CSV export with confidence scores, method, and AI reasoning",
+      "Password-gated V2 to protect API key"
     ]
   }
   </script>
 
   <style>
-    /* ── Version comparison block (unique to this page) ── */
+    /* ── Version comparison block ── */
     .version-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -128,6 +139,106 @@
     .version-result.v1 { background: #f2f4f9; color: #4a5568; }
     .version-result.v2 { background: #e6f3f5; color: #2a7d8c; }
 
+    /* ── Screenshot gallery ── */
+    .screenshot-section-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 1.25rem;
+    }
+    .screenshot-section-label .ver-pill {
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 10px;
+    }
+    .screenshot-section-label .ver-pill.v1 { background: #1a2744; color: #fff; }
+    .screenshot-section-label .ver-pill.v2 { background: #2a7d8c; color: #fff; }
+
+    .screenshot-gallery {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      margin-bottom: 2.5rem;
+    }
+    @media (max-width: 680px) {
+      .screenshot-gallery { grid-template-columns: 1fr; }
+    }
+    .screenshot-link {
+      display: block;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--border, #dde1ec);
+      box-shadow: 0 2px 16px rgba(26,39,68,0.06);
+      transition: box-shadow 0.2s, transform 0.2s;
+      text-decoration: none;
+    }
+    .screenshot-link:hover {
+      box-shadow: 0 6px 28px rgba(26,39,68,0.13);
+      transform: translateY(-2px);
+    }
+    .screenshot-link img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    .screenshot-caption {
+      padding: 0.6rem 0.875rem;
+      background: #f8f7f4;
+      border-top: 1px solid var(--border, #dde1ec);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: #8a95a8;
+    }
+    .open-tool-row {
+      text-align: center;
+      margin-top: 0.5rem;
+    }
+
+    /* ── Confidence tier table ── */
+    .conf-tiers {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      margin-top: 1.5rem;
+    }
+    .conf-tier {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      background: #fff;
+      border: 1px solid var(--border, #dde1ec);
+      border-radius: 8px;
+      padding: 0.85rem 1.1rem;
+    }
+    .conf-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 5px;
+    }
+    .conf-pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      font-weight: 500;
+      padding: 3px 10px;
+      border-radius: 20px;
+      border: 1px solid;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .conf-desc {
+      font-size: 13px;
+      color: #4a5568;
+      line-height: 1.55;
+    }
+    .conf-desc strong { color: #1a2744; }
+
     /* ── Diff panel explainer ── */
     .diff-explainer {
       display: grid;
@@ -146,9 +257,9 @@
       padding: 1.25rem;
       border-top: 3px solid;
     }
-    .diff-card.matched { border-top-color: #2a7d4f; background: #f4fbf7; }
-    .diff-card.newpages { border-top-color: #2a7d8c; background: #e6f3f5; }
-    .diff-card.atrisk { border-top-color: #c0392b; background: #fdf0ef; }
+    .diff-card.matched   { border-top-color: #2a7d4f; background: #f4fbf7; }
+    .diff-card.newpages  { border-top-color: #2a7d8c; background: #e6f3f5; }
+    .diff-card.atrisk    { border-top-color: #c0392b; background: #fdf0ef; }
     .diff-card.unmatched { border-top-color: #6b2fa0; background: #f5f0fa; }
     .diff-card-label {
       font-family: 'JetBrains Mono', monospace;
@@ -157,13 +268,13 @@
       letter-spacing: 1px;
       margin-bottom: 0.5rem;
     }
-    .diff-card.matched .diff-card-label { color: #2a7d4f; }
-    .diff-card.newpages .diff-card-label { color: #2a7d8c; }
-    .diff-card.atrisk .diff-card-label { color: #c0392b; }
+    .diff-card.matched   .diff-card-label { color: #2a7d4f; }
+    .diff-card.newpages  .diff-card-label { color: #2a7d8c; }
+    .diff-card.atrisk    .diff-card-label { color: #c0392b; }
     .diff-card.unmatched .diff-card-label { color: #6b2fa0; }
     .diff-card p { font-size: 13px; color: #4a5568; line-height: 1.55; margin: 0; }
 
-    /* ── Limitations list ── */
+    /* ── Limitations ── */
     .limitations-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -242,12 +353,12 @@
         <p class="intro t-en">A browser-based tool that automates 301 redirect mapping for site migrations — combining algorithmic URL similarity scoring with Claude AI semantic reasoning to resolve mappings that string-matching alone cannot handle.</p>
         <p class="intro t-da">Et browserbaseret værktøj der automatiserer 301 redirect-mapping til site-migreringer — kombinerer algoritmisk URL-similaritetsscore med Claude AI-semantisk ræsonnering til at løse mappings, som strengmatchning alene ikke kan håndtere.</p>
 
-        <p class="intro t-en">The tool exists in two versions. V1 is fully algorithmic — no AI, no API key required. V2 takes the URLs that V1 couldn't confidently resolve and passes them to Claude for semantic reasoning. The difference between those two outputs is the honest answer to the question: when does AI actually add value?</p>
-        <p class="intro t-da">Værktøjet findes i to versioner. V1 er fuldt algoritmisk — ingen AI, ingen API-nøgle nødvendig. V2 tager de URL'er som V1 ikke kunne løse med sikkerhed og sender dem til Claude til semantisk ræsonnering. Forskellen mellem de to output er det ærlige svar på spørgsmålet: hvornår tilføjer AI faktisk værdi?</p>
+        <p class="intro t-en">The tool exists in two versions. V1 is fully algorithmic — no AI, no API key, no latency. V2 takes the URLs that V1 couldn't confidently resolve and passes them to Claude for semantic reasoning. The difference between those two outputs is the honest answer to the question: when does AI actually add value?</p>
+        <p class="intro t-da">Værktøjet findes i to versioner. V1 er fuldt algoritmisk — ingen AI, ingen API-nøgle, ingen ventetid. V2 tager de URL'er som V1 ikke kunne løse med sikkerhed og sender dem til Claude til semantisk ræsonnering. Forskellen mellem de to output er det ærlige svar på spørgsmålet: hvornår tilføjer AI faktisk værdi?</p>
       </div>
     </section>
 
-    <!-- ===================== LIVE TOOL ===================== -->
+    <!-- ===================== SCREENSHOTS ===================== -->
     <section style="padding: 0 0 var(--section-gap);">
       <div class="container">
         <div class="section-header fade-up">
@@ -256,25 +367,58 @@
             <span class="t-da">Prøv det</span>
           </span>
           <h2>
-            <span class="t-en">Live tool</span>
-            <span class="t-da">Live værktøj</span>
+            <span class="t-en">See it in action</span>
+            <span class="t-da">Se det i aktion</span>
           </h2>
         </div>
-        <p class="t-en fade-up" style="max-width:680px; margin-bottom:1.5rem;">Use the tool directly below — no sign-up, no install. Hit <strong>⚡ load demo</strong> to run the pre-built migration scenario, or paste your own sitemaps. Click <strong>✦ Enhance with Claude</strong> to see V2 in action (uses the Anthropic API).</p>
-        <p class="t-da fade-up" style="max-width:680px; margin-bottom:1.5rem;">Brug værktøjet direkte nedenfor — ingen tilmelding, ingen installation. Tryk <strong>⚡ load demo</strong> for at køre det præbyggede migrationsscenarie, eller indsæt dine egne sitemaps. Klik <strong>✦ Enhance with Claude</strong> for at se V2 i aktion (bruger Anthropic API).</p>
-        <a href="https://redirect-mapper-ciwsudc1t-samuell-19s-projects.vercel.app" target="_blank" rel="noopener" class="fade-up" style="display:block; border-radius:12px; overflow:hidden; border:1px solid var(--border, #dde1ec); box-shadow: 0 4px 24px rgba(26,39,68,0.06);">
-          <img
-            src="../assets/redirect-mapper-screenshot.png"
-            alt="Redirect Mapper tool — upload sitemaps interface"
-            width="100%"
-            style="display:block; width:100%; height:auto;">
-        </a>
-        <p class="t-en" style="margin-top:0.75rem; font-size:13px; color:#8a95a8;">
-          <a href="https://redirect-mapper-ciwsudc1t-samuell-19s-projects.vercel.app" target="_blank" rel="noopener" style="color:#2a7d8c;">Open the live tool in a new tab →</a>
-        </p>
-        <p class="t-da" style="margin-top:0.75rem; font-size:13px; color:#8a95a8;">
-          <a href="https://redirect-mapper-ciwsudc1t-samuell-19s-projects.vercel.app" target="_blank" rel="noopener" style="color:#2a7d8c;">Åbn det live værktøj i en ny fane →</a>
-        </p>
+
+        <p class="t-en fade-up" style="max-width:680px; margin-bottom:2rem;">Click any screenshot to open the live tool. Hit <strong>⚡ load demo</strong> to run the pre-built migration scenario, or paste your own XML sitemaps. V1 runs instantly. V2 requires the access password — <a href="mailto:samuel.ivanka@gmail.com">get in touch</a> if you'd like to try it.</p>
+        <p class="t-da fade-up" style="max-width:680px; margin-bottom:2rem;">Klik på et skærmbillede for at åbne det live værktøj. Tryk <strong>⚡ load demo</strong> for at køre det præbyggede migrationsscenarie, eller indsæt dine egne XML-sitemaps. V1 kører øjeblikkeligt. V2 kræver adgangskoden — <a href="mailto:samuel.ivanka@gmail.com">kontakt mig</a> hvis du vil prøve det.</p>
+
+        <div class="fade-up" style="max-width:680px; margin-bottom:2rem; background:#f2f4f9; border-left:3px solid #dde1ec; border-radius:8px; padding:0.9rem 1.1rem;">
+          <div style="font-family:'JetBrains Mono',monospace; font-size:10px; text-transform:uppercase; letter-spacing:1px; color:#8a95a8; margin-bottom:0.5rem;">Format requirement</div>
+          <p class="t-en" style="font-size:13px; color:#4a5568; line-height:1.6; margin:0;">Sitemaps must be standard XML sitemap format — a <code style="font-family:'JetBrains Mono',monospace;font-size:12px;background:#fff;padding:1px 5px;border-radius:3px;">&lt;urlset&gt;</code> file with <code style="font-family:'JetBrains Mono',monospace;font-size:12px;background:#fff;padding:1px 5px;border-radius:3px;">&lt;loc&gt;</code> tags. Most CMS platforms export this directly — WordPress via Yoast or RankMath, Screaming Frog via File → Export Sitemap. <strong>Sitemap index files</strong> (a sitemap that links to other sitemaps) are not supported — download the individual child sitemaps instead and run them separately.</p>
+          <p class="t-da" style="font-size:13px; color:#4a5568; line-height:1.6; margin:0;">Sitemaps skal være i standard XML sitemap-format — en <code style="font-family:'JetBrains Mono',monospace;font-size:12px;background:#fff;padding:1px 5px;border-radius:3px;">&lt;urlset&gt;</code>-fil med <code style="font-family:'JetBrains Mono',monospace;font-size:12px;background:#fff;padding:1px 5px;border-radius:3px;">&lt;loc&gt;</code>-tags. De fleste CMS-platforme eksporterer dette direkte — WordPress via Yoast eller RankMath, Screaming Frog via Fil → Eksporter Sitemap. <strong>Sitemap index-filer</strong> (et sitemap der linker til andre sitemaps) understøttes ikke — download de individuelle child-sitemaps i stedet og kør dem separat.</p>
+        </div>
+
+        <!-- V1 screenshots -->
+        <div class="screenshot-section-label fade-up">
+          <span class="ver-pill v1">V1</span>
+          Algorithmic — runs instantly, no API required
+        </div>
+        <div class="screenshot-gallery fade-up">
+          <a href="https://redirect-mapper-git-main-samuell-19s-projects.vercel.app" target="_blank" rel="noopener" class="screenshot-link">
+            <img src="../assets/redirect-mapper-v1-results.png" alt="Redirect Mapper V1 — algorithmic results table showing confidence scores">
+            <div class="screenshot-caption">Results table · confidence scores · algo method tags</div>
+          </a>
+          <a href="https://redirect-mapper-git-main-samuell-19s-projects.vercel.app" target="_blank" rel="noopener" class="screenshot-link">
+            <img src="../assets/redirect-mapper-v1-diff.png" alt="Redirect Mapper V1 — migration diff panel showing matched, new pages, at-risk and unmatched">
+            <div class="screenshot-caption">Migration diff · matched · new pages · at risk · unmatched</div>
+          </a>
+        </div>
+
+        <!-- V2 screenshots -->
+        <div class="screenshot-section-label fade-up">
+          <span class="ver-pill v2">V2</span>
+          Claude-enhanced — semantic reasoning on weak matches
+        </div>
+        <div class="screenshot-gallery fade-up">
+          <a href="https://redirect-mapper-git-main-samuell-19s-projects.vercel.app" target="_blank" rel="noopener" class="screenshot-link">
+            <img src="../assets/redirect-mapper-v2-results.png" alt="Redirect Mapper V2 — Claude-enhanced results with AI reasoning column">
+            <div class="screenshot-caption">V2 results · ✦ claude method tags · AI reasoning column</div>
+          </a>
+          <a href="https://redirect-mapper-git-main-samuell-19s-projects.vercel.app" target="_blank" rel="noopener" class="screenshot-link">
+            <img src="../assets/redirect-mapper-v2-diff.png" alt="Redirect Mapper V2 — migration diff panel after Claude semantic enhancement">
+            <div class="screenshot-caption">Consolidate tier · best-available redirect · advisory to create new page</div>
+          </a>
+        </div>
+
+        <div class="open-tool-row fade-up">
+          <a href="https://redirect-mapper-git-main-samuell-19s-projects.vercel.app" target="_blank" rel="noopener" style="font-family:'JetBrains Mono',monospace; font-size:12px; color:#2a7d8c;">
+            <span class="t-en">Open the live tool →</span>
+            <span class="t-da">Åbn det live værktøj →</span>
+          </a>
+        </div>
       </div>
     </section>
 
@@ -339,10 +483,18 @@
                 </li>
                 <li>
                   <span class="step-ico">05</span>
-                  <div><strong>Confidence thresholds</strong> — score ≥ 0.75 = high, ≥ 0.40 = medium, below = low. Best match per old URL is kept regardless.</div>
+                  <div><strong>Leaf-slug penalty</strong> — if two URLs share folder tokens but have different leaf slugs (e.g. <code style="font-family:'JetBrains Mono',monospace;font-size:12px;">aeo-tips</code> vs <code style="font-family:'JetBrains Mono',monospace;font-size:12px;">seo-tips</code>), the score is penalised. The slug is the page identity — a different slug is a different page.</div>
+                </li>
+                <li>
+                  <span class="step-ico">06</span>
+                  <div><strong>Synonym awareness</strong> — common slug equivalents are known by the algorithm: <code style="font-family:'JetBrains Mono',monospace;font-size:12px;">contact</code> / <code style="font-family:'JetBrains Mono',monospace;font-size:12px;">contact-us</code>, <code style="font-family:'JetBrains Mono',monospace;font-size:12px;">faq</code> / <code style="font-family:'JetBrains Mono',monospace;font-size:12px;">common-questions</code>, <code style="font-family:'JetBrains Mono',monospace;font-size:12px;">careers</code> / <code style="font-family:'JetBrains Mono',monospace;font-size:12px;">join-us</code>, and more — these score 92% without being penalised as mismatches.</div>
+                </li>
+                <li>
+                  <span class="step-ico">07</span>
+                  <div><strong>Confidence thresholds</strong> — score ≥ 0.75 = high, ≥ 0.40 = medium, below = low, below 0.15 = unmatched (no forced bad match).</div>
                 </li>
               </ul>
-              <div class="version-result v1">Works well for folder renames (/blog/ → /insights/) and identical slugs across paths. Struggles when both the folder and the slug change.</div>
+              <div class="version-result v1">Works well for folder renames (/blog/ → /insights/) and identical or synonym slugs. Struggles when both the folder and the slug change with no lexical overlap.</div>
             </div>
           </div>
 
@@ -356,11 +508,11 @@
               <ul class="version-steps">
                 <li>
                   <span class="step-ico teal">01</span>
-                  <div><strong>Filter weak matches</strong> — only URLs with medium or low confidence from V1 are passed to Claude. High-confidence matches are kept as-is. No unnecessary API calls.</div>
+                  <div><strong>Filter weak matches</strong> — only URLs with medium, low, or unmatched confidence from V1 are passed to Claude. High-confidence matches are kept as-is. No unnecessary API calls.</div>
                 </li>
                 <li>
                   <span class="step-ico teal">02</span>
-                  <div><strong>Structured prompt</strong> — Claude receives the full list of available new URLs alongside each unresolved old URL and its current best guess, and is asked to reason semantically.</div>
+                  <div><strong>Structured prompt</strong> — Claude receives the full list of available new URLs alongside each unresolved old URL and its current best guess, and is asked to reason semantically about page intent.</div>
                 </li>
                 <li>
                   <span class="step-ico teal">03</span>
@@ -368,17 +520,64 @@
                 </li>
                 <li>
                   <span class="step-ico teal">04</span>
-                  <div><strong>Reasoning output</strong> — each AI-resolved match includes a one-sentence explanation of why the match was made. Reviewable, auditable, not a black box.</div>
+                  <div><strong>Consolidate decisions</strong> — when a page no longer exists in the new sitemap, Claude identifies the best available destination and flags it as <em>consolidate</em> rather than high confidence, signalling that a new page may be worth creating.</div>
                 </li>
                 <li>
                   <span class="step-ico teal">05</span>
+                  <div><strong>Reasoning output</strong> — each AI-resolved match includes a one-sentence explanation of why the match was made. Reviewable, auditable, not a black box.</div>
+                </li>
+                <li>
+                  <span class="step-ico teal">06</span>
                   <div><strong>Method attribution</strong> — every row in the output is tagged <em>algo</em> or <em>claude</em> so you always know which engine made each call.</div>
                 </li>
               </ul>
-              <div class="version-result v2">Resolves semantically renamed paths that V1 scores below 40%. The ✦ AI tag and reasoning column make every Claude decision reviewable.</div>
+              <div class="version-result v2">Resolves semantically renamed paths and makes consolidation decisions V1 cannot. The ✦ AI tag and reasoning column make every Claude decision reviewable before you deploy.</div>
             </div>
           </div>
 
+        </div>
+
+        <!-- Confidence tiers -->
+        <div class="section-header fade-up" style="margin-top:3rem;">
+          <span class="label">
+            <span class="t-en">Reading the output</span>
+            <span class="t-da">Forstå outputtet</span>
+          </span>
+          <h2>
+            <span class="t-en">Confidence tiers</span>
+            <span class="t-da">Tillidsgrader</span>
+          </h2>
+        </div>
+
+        <p class="t-en fade-up" style="max-width:680px;">Every mapped URL is assigned one of five confidence tiers. Each tier has a specific meaning and a specific recommended action — not just a colour.</p>
+        <p class="t-da fade-up" style="max-width:680px;">Hver mappet URL tildeles en af fem tillidsgrader. Hver grad har en specifik betydning og en specifik anbefalet handling — ikke bare en farve.</p>
+
+        <div class="conf-tiers fade-up">
+          <div class="conf-tier">
+            <span class="conf-dot" style="background:#2a7d4f;"></span>
+            <span class="conf-pill" style="background:#edf7f2;border-color:#c3e6d4;color:#1a5c38;">high</span>
+            <span class="conf-desc"><strong>Same page, new path.</strong> The algorithm or Claude is confident this is a direct 1-to-1 match — the URL was renamed or moved but the page content is the same. Safe to deploy as a 301 redirect.</span>
+          </div>
+          <div class="conf-tier">
+            <span class="conf-dot" style="background:#b87020;"></span>
+            <span class="conf-pill" style="background:#fef7ed;border-color:#f5d9a8;color:#7a4a10;">medium</span>
+            <span class="conf-desc"><strong>Likely the same page — verify before deploying.</strong> The slug or folder structure changed significantly enough that the algorithm is not fully certain. Review the match manually before implementing.</span>
+          </div>
+          <div class="conf-tier">
+            <span class="conf-dot" style="background:#c0392b;"></span>
+            <span class="conf-pill" style="background:#fdf0ef;border-color:#f5c6c2;color:#8b1a14;">low</span>
+            <span class="conf-desc"><strong>Weak match — the danger zone.</strong> The algorithm found the closest available URL, but the overlap is thin. These are the most likely source of post-migration 404s. Review every one.</span>
+          </div>
+          <div class="conf-tier">
+            <span class="conf-dot" style="background:#c07020;"></span>
+            <span class="conf-pill" style="background:#fef3e2;border-color:#f5c87a;color:#7a4010;">consolidate</span>
+            <span class="conf-desc"><strong>Page is gone — best available redirect.</strong> The original page has no direct equivalent in the new sitemap. Claude has identified the most topically related destination to prevent a 404, but this is not a true match. Consider whether the original content deserves a dedicated new page to preserve SEO equity.</span>
+          </div>
+          <div class="conf-tier">
+            <span class="conf-dot" style="background:#6b2fa0;"></span>
+            <span class="conf-pill" style="background:#f5f0fa;border-color:#d4b8f0;color:#4a1a7a;">unmatched</span>
+            <span class="conf-desc"><strong>No viable match found.</strong> Neither the algorithm nor Claude could identify a reasonable destination. A deliberate decision is required: omit the redirect entirely, point to the homepage, or consolidate into the closest existing page.</span>
+          </div>
         </div>
 
         <!-- Migration diff section -->
@@ -393,25 +592,25 @@
           </h2>
         </div>
 
-        <p class="t-en fade-up" style="max-width:680px;">A redirect map only tells half the migration story. The diff panel surfaces the full picture — what's been matched, what's brand new, what's at risk of becoming a 404, and what has no equivalent at all in the new sitemap.</p>
-        <p class="t-da fade-up" style="max-width:680px;">Et redirect-map fortæller kun halvdelen af migreringens historie. Diff-panelet afslører det fulde billede — hvad der er matchet, hvad der er helt nyt, hvad der risikerer at blive en 404, og hvad der slet ikke har en pendant i det nye sitemap.</p>
+        <p class="t-en fade-up" style="max-width:680px;">A redirect map only tells half the migration story. The diff panel surfaces the full picture — what's ready to implement, what's brand new, what's at risk of becoming a 404, and what has no equivalent at all.</p>
+        <p class="t-da fade-up" style="max-width:680px;">Et redirect-map fortæller kun halvdelen af migreringens historie. Diff-panelet afslører det fulde billede — hvad der er klar til implementering, hvad der er helt nyt, hvad der risikerer at blive en 404, og hvad der slet ikke har en pendant.</p>
 
         <div class="diff-explainer fade-up">
           <div class="diff-card matched">
             <div class="diff-card-label">✓ Matched</div>
-            <p>All old URLs mapped to a new destination with medium or high confidence. These are ready to implement as 301s. Confidence score shown per row.</p>
+            <p>All old URLs mapped to a new destination with medium or high confidence. Ready to implement as 301s. Confidence score and method shown per row.</p>
           </div>
           <div class="diff-card newpages">
             <div class="diff-card-label">+ New pages</div>
-            <p>URLs present in the new sitemap with no equivalent in the old one. These go live fresh — no redirect needed, but worth flagging for content planning.</p>
+            <p>URLs in the new sitemap with no old equivalent. These go live fresh — no redirect needed. Not missing redirects, just genuinely new content.</p>
           </div>
           <div class="diff-card atrisk">
             <div class="diff-card-label">⚠ At risk</div>
-            <p>Old URLs with low-confidence matches. These are the migration's danger zone — potential 404s, lost backlink equity, and crawl budget waste if missed.</p>
+            <p>Old URLs with low-confidence matches. The migration's danger zone — likely 404s, lost backlink equity, and crawl budget waste if left unaddressed.</p>
           </div>
           <div class="diff-card unmatched">
             <div class="diff-card-label">✕ Unmatched</div>
-            <p>Old URLs with no viable match in the new sitemap. Each one needs a deliberate decision: omit entirely, redirect to the homepage, or consolidate into the closest existing page.</p>
+            <p>Old URLs with no viable redirect target. Without a decision these will 404 after migration. Each one needs deliberate action before go-live.</p>
           </div>
         </div>
 
@@ -445,11 +644,29 @@
 
           <div class="decision-block fade-up">
             <h4>
+              <span class="t-en">Why a leaf-slug penalty?</span>
+              <span class="t-da">Hvorfor en leaf-slug-straf?</span>
+            </h4>
+            <p class="t-en">Without it, <code style="font-family:'JetBrains Mono',monospace;font-size:12px;">/blog/aeo-tips-2024</code> would score 92% against <code style="font-family:'JetBrains Mono',monospace;font-size:12px;">/blog/seo-tips-2024</code> because they share "blog", "tips", and "2024". But AEO and SEO are different disciplines — a false high-confidence match here would silently corrupt the redirect map. The penalty ensures that a different leaf slug is treated as a different page, not a near-miss of the same one.</p>
+            <p class="t-da">Uden den ville <code style="font-family:'JetBrains Mono',monospace;font-size:12px;">/blog/aeo-tips-2024</code> score 92% mod <code style="font-family:'JetBrains Mono',monospace;font-size:12px;">/blog/seo-tips-2024</code> fordi de deler "blog", "tips" og "2024". Men AEO og SEO er forskellige discipliner — et falsk højt-sikkerhedsmatch her ville stille og roligt korruptere redirect-mappen. Straffen sikrer at et anderledes leaf-slug behandles som en anderledes side.</p>
+          </div>
+
+          <div class="decision-block fade-up">
+            <h4>
               <span class="t-en">Why only send weak matches to Claude?</span>
               <span class="t-da">Hvorfor sende kun svage matches til Claude?</span>
             </h4>
             <p class="t-en">Sending every URL to Claude would be wasteful, slow, and expensive at scale — and unnecessary. If the algorithm is already 92% confident that <code style="font-family:'JetBrains Mono',monospace;font-size:12px;">/blog/seo-tips</code> maps to <code style="font-family:'JetBrains Mono',monospace;font-size:12px;">/insights/seo-tips</code>, there's no value in asking Claude to confirm it. AI is used surgically, on the cases that actually need it.</p>
             <p class="t-da">At sende alle URL'er til Claude ville være spild, langsomt og dyrt i skala — og unødvendigt. Hvis algoritmen allerede er 92% sikker på at <code style="font-family:'JetBrains Mono',monospace;font-size:12px;">/blog/seo-tips</code> mapper til <code style="font-family:'JetBrains Mono',monospace;font-size:12px;">/insights/seo-tips</code>, er der ingen værdi i at bede Claude bekræfte det. AI bruges kirurgisk, på de tilfælde der faktisk har brug for det.</p>
+          </div>
+
+          <div class="decision-block fade-up">
+            <h4>
+              <span class="t-en">Why a consolidate tier instead of just high?</span>
+              <span class="t-da">Hvorfor en consolidate-grad i stedet for bare high?</span>
+            </h4>
+            <p class="t-en">When a page is gone from the new sitemap, a redirect to the most topically related page is better than a 404 — but it is not the same as a true 1-to-1 match. Calling it "high" would be misleading. The consolidate tier signals: this redirect will prevent a 404, but the original content has no dedicated home in the new site. That's an editorial decision the SEO needs to make consciously, not something a tool should silently paper over.</p>
+            <p class="t-da">Når en side er forsvundet fra det nye sitemap, er en redirect til den mest emnemæssigt relaterede side bedre end en 404 — men det er ikke det samme som et sandt 1-til-1-match. At kalde det "high" ville være vildledende. Consolidate-graden signalerer: denne redirect vil forhindre en 404, men det originale indhold har intet dedikeret hjem på det nye site. Det er en redaktionel beslutning som SEO'en skal træffe bevidst.</p>
           </div>
 
           <div class="decision-block fade-up">
@@ -466,8 +683,8 @@
               <span class="t-en">Why does the demo sitemap have intentionally hard cases?</span>
               <span class="t-da">Hvorfor har demo-sitemappet bevidst svære tilfælde?</span>
             </h4>
-            <p class="t-en">The demo isn't designed to make the tool look good — it's designed to show honestly where V1 breaks down and where V2 recovers. About 60% of URLs are simple folder renames that V1 handles fine. 25% are semantically renamed paths that V1 scores poorly but Claude resolves correctly. 15% are structural changes that V1 fails on entirely. That honest split is the actual demonstration.</p>
-            <p class="t-da">Demoen er ikke designet til at få værktøjet til at se godt ud — den er designet til ærligt at vise hvor V1 bryder ned og hvor V2 genopretter. Ca. 60% af URL'er er simple mappeombygninger som V1 håndterer fint. 25% er semantisk omdøbte stier som V1 scorer dårligt men Claude løser korrekt. 15% er strukturelle ændringer som V1 fejler helt på. Den ærlige fordeling er den faktiske demonstration.</p>
+            <p class="t-en">The demo isn't designed to make the tool look good — it's designed to show honestly where V1 breaks down and where V2 recovers. About 60% of URLs are simple folder renames that V1 handles fine. 25% are semantically renamed paths that V1 scores poorly but Claude resolves correctly. 15% are structural changes with no lexical overlap — unmatched by V1, assessed by Claude. That honest split is the actual demonstration.</p>
+            <p class="t-da">Demoen er ikke designet til at få værktøjet til at se godt ud — den er designet til ærligt at vise hvor V1 bryder ned og hvor V2 genopretter. Ca. 60% af URL'er er simple mappeombygninger som V1 håndterer fint. 25% er semantisk omdøbte stier som V1 scorer dårligt men Claude løser korrekt. 15% er strukturelle ændringer uden leksikalsk overlap — umatched af V1, vurderet af Claude. Den ærlige fordeling er den faktiske demonstration.</p>
           </div>
 
         </div>
@@ -506,9 +723,9 @@
           </div>
 
           <div class="limitation-item">
-            <h4>Arbitrary confidence thresholds</h4>
-            <p>The thresholds used (≥ 0.75 = high, ≥ 0.40 = medium) are calibrated against the demo sitemaps, not validated against real migration data at scale. On messy real-world URLs with numeric IDs, parameters, or inconsistent naming, these thresholds may need tuning.</p>
-            <span class="limitation-fix">fix → threshold calibration against labelled migration datasets</span>
+            <h4>No manual override in the UI</h4>
+            <p>If the algorithm or Claude gets a match wrong, there is no way to correct it inside the tool. You would need to edit the exported CSV manually. An editable results table with inline correction would be the obvious next step.</p>
+            <span class="limitation-fix">fix → editable table cells + re-export</span>
           </div>
 
           <div class="limitation-item">
@@ -554,6 +771,9 @@
           <li class="t-en fade-up">Merge vs. redirect decision layer — Claude reads both pages and recommends: 301 redirect, canonical tag, content merge, or keep separate</li>
           <li class="t-da fade-up">Fletning vs. redirect-beslutningslag — Claude læser begge sider og anbefaler: 301 redirect, canonical tag, indholdsfletning eller hold adskilt</li>
 
+          <li class="t-en fade-up">Inline override — editable results table, correct any match before export without touching the CSV</li>
+          <li class="t-da fade-up">Inline rettelse — redigerbar resultattabel, ret ethvert match før eksport uden at røre CSV'en</li>
+
           <li class="t-en fade-up">Redirect chain resolution — input existing .htaccess or redirect file, detect and flatten A → B → C chains before output</li>
           <li class="t-da fade-up">Redirect-kædeløsning — input eksisterende .htaccess eller redirect-fil, registrer og fladgør A → B → C-kæder før output</li>
 
@@ -578,7 +798,10 @@
           <span class="tech-badge">React</span>
           <span class="tech-badge">JavaScript (browser)</span>
           <span class="tech-badge">Claude API (Sonnet)</span>
+          <span class="tech-badge">Vercel serverless proxy</span>
           <span class="tech-badge">Jaccard similarity</span>
+          <span class="tech-badge">Leaf-slug penalty</span>
+          <span class="tech-badge">Synonym matching</span>
           <span class="tech-badge">XML sitemap parsing</span>
           <span class="tech-badge">CSV export</span>
           <span class="tech-badge">DOMParser</span>
@@ -608,4 +831,10 @@
          · samuel.ivanka@gmail.com
       </span>
       <span class="footer-note t-en">Built with semantic HTML, JSON-LD schema and hreflang best practices — because SEO starts in the code.</span>
-      <span class="footer-note t-da">Bygget med se
+      <span class="footer-note t-da">Bygget med semantisk HTML, JSON-LD schema og hreflang best practices — fordi SEO starter i koden.</span>
+    </div>
+  </footer>
+
+  <script src="../script.js"></script>
+</body>
+</html>

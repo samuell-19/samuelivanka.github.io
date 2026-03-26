@@ -46,7 +46,7 @@
       "Ahrefs Batch Analysis CSV parsing",
       "6-criteria algorithmic scoring",
       "Ratio-based link balance detection",
-      "PBN and link farm signal detection",
+      "PBN signal detection: subnet diversity, dofollow %, backlink/RD ratio flag",
       "Geo and ccTLD relevance check",
       "Claude AI topical analysis and anchor text recommendations",
       "Key pages input for destination URL matching",
@@ -324,8 +324,8 @@
                 <span class="t-en">Claude AI analysis (V2)</span>
                 <span class="t-da">Claude AI-analyse (V2)</span>
               </div>
-              <p class="pipeline-step-desc t-en">All domains passing V1 are sent to Claude with destination context — domain, target keywords, key pages to link to, and optional GSC data. Claude assesses topical relevance, geo fit, and whether each domain looks like a genuine editorial property or a guest post farm. It then picks the most relevant destination URL from your list and suggests contextually matched anchor texts.</p>
-              <p class="pipeline-step-desc t-da">Alle domæner der består V1 sendes til Claude med destinationskontekst — domæne, målsøgeord, key pages og valgfri GSC-data. Claude vurderer topical relevans, geo-match og om domænet ligner en ægte redaktionel side. Det vælger derefter den mest relevante destinations-URL fra din liste og foreslår kontekstuelt matchede anchor texts.</p>
+              <p class="pipeline-step-desc t-en">All domains passing V1 are sent to Claude with destination context — domain, target keywords, key pages to link to, and optional GSC data. Claude assesses topical relevance, geo fit, and whether each domain looks like a genuine editorial property or a guest post farm. It then picks the most relevant destination URL from your list and suggests contextually matched anchor texts. Note: Claude infers from domain name and available metrics — it does not crawl or visit the domain. Topical verdicts are informed inference, not content analysis.</p>
+              <p class="pipeline-step-desc t-da">Alle domæner der består V1 sendes til Claude med destinationskontekst — domæne, målsøgeord, key pages og valgfri GSC-data. Claude vurderer topical relevans, geo-match og om domænet ligner en ægte redaktionel side. Det vælger derefter den mest relevante destinations-URL fra din liste og foreslår kontekstuelt matchede anchor texts. Bemærk: Claude udleder fra domænenavn og tilgængelige metrikker — det crawler eller besøger ikke domænet. Topical verdikter er informerede antagelser, ikke indholdsanalyse.</p>
               <div class="pipeline-step-meta">
                 <div class="meta-row">
                   <span class="meta-label">API</span>
@@ -417,8 +417,8 @@
                 <td><strong><span class="t-en">PBN signals</span><span class="t-da">PBN-signaler</span></strong></td>
                 <td><span class="deduction-mild">Weighted</span></td>
                 <td>
-                  <span class="t-en">Three independent checks that individually are not conclusive but together paint a picture: unnaturally high dofollow % (probably no real site is 97%+ dofollow), very low backlink-to-referring-domain ratio (suggests reciprocal link exchange networks), and low IP diversity among referring domains (a cluster of links from the same IP range suggests a private blog network).</span>
-                  <span class="t-da">Tre uafhængige tjek der individuelt ikke er afgørende, men samlet tegner et billede: unaturligt høj dofollow % (umiddelbart intet rigtigt site er 97%+ dofollow), meget lav backlink/referring domain-ratio (tyder på reciprokke linkudvekslingsnetværk), og lav IP-diversitet (en klynge af links fra samme IP-range tyder på et privat blognetværk).</span>
+                  <span class="t-en">Three independent checks: unnaturally high dofollow % (no real site is 97%+ dofollow, scored), low subnet diversity among referring domains (subnets reveal shared hosting infrastructure that raw IP counts miss — flagged), and low backlink-to-referring-domain ratio (suggests link exchange networks — flagged, not scored, as newer legitimate sites also show low ratios). Subnet diversity replaced raw IP count as the more reliable PBN signal.</span>
+                  <span class="t-da">Tre uafhængige tjek: unaturligt høj dofollow % (intet rigtigt site er 97%+ dofollow, scores), lav subnet-diversitet (subnets afslører delt hosting-infrastruktur som rå IP-antal ikke fanger — markeres som flag), og lav backlink/referring domain-ratio (tyder på linkudveksling — markeres som flag, ikke score, da nyere legitime sites også viser lave ratioer). Subnet-diversitet erstattede rå IP-antal som det mere pålidelige PBN-signal.</span>
                 </td>
               </tr>
               <tr>
@@ -499,8 +499,8 @@
               <tr>
                 <td><strong><span class="t-en">PBN signals</span><span class="t-da">PBN-signaler</span></strong></td>
                 <td><span class="status-pill pill-auto">✓ Auto-scored</span></td>
-                <td class="t-en">Dofollow %, backlink/RD ratio, IP diversity, outgoing domain ceiling</td>
-                <td class="t-da">Dofollow %, backlink/RD ratio, IP-diversitet, outgoing domain-loft</td>
+                <td class="t-en">Dofollow %, subnet diversity (flag), backlink/RD ratio (flag), outgoing domain ceiling</td>
+                <td class="t-da">Dofollow %, subnet-diversitet (flag), backlink/RD ratio (flag), outgoing domain-loft</td>
               </tr>
               <tr>
                 <td><strong><span class="t-en">Geo / ccTLD relevance</span><span class="t-da">Geo / ccTLD relevans</span></strong></td>
@@ -523,20 +523,20 @@
               <tr>
                 <td><strong><span class="t-en">Traffic trend (6 months)</span><span class="t-da">Trafiktrendanalyse (6 måneder)</span></strong></td>
                 <td><span class="status-pill pill-manual">! Manual check</span></td>
-                <td class="t-en">Requires Ahrefs MCP connection — verify in Ahrefs for shortlisted domains only</td>
-                <td class="t-da">Kræver Ahrefs MCP-forbindelse — verificer i Ahrefs kun for shortlistede domæner</td>
+                <td class="t-en">Automatable via Ahrefs MCP (now available from Lite subscriptions) — currently verified manually in Ahrefs for shortlisted domains only</td>
+                <td class="t-da">Kan automatiseres via Ahrefs MCP (nu tilgængeligt fra Lite-abonnementer) — verificeres i øjeblikket manuelt i Ahrefs kun for shortlistede domæner</td>
               </tr>
               <tr>
                 <td><strong><span class="t-en">Keyword ranking trend</span><span class="t-da">Søgeordsrankering-trend</span></strong></td>
                 <td><span class="status-pill pill-manual">! Manual check</span></td>
-                <td class="t-en">Whether the site's organic keyword count is growing or shrinking — a declining keyword profile is a strong signal of a penalised or abandoned site. Requires Ahrefs MCP connection to check programmatically.</td>
-                <td class="t-da">Om sitets organiske søgeordsantal vokser eller skrumper — en faldende søgeordsprofil er et stærkt signal om et straffet eller forladt site. Kræver Ahrefs MCP-forbindelse for programmatisk tjek.</td>
+                <td class="t-en">Whether the site's organic keyword count is growing or shrinking — a declining profile is a strong signal of a penalised or abandoned site. Automatable via Ahrefs MCP (now on Lite) — currently checked manually for shortlisted domains.</td>
+                <td class="t-da">Om sitets organiske søgeordsantal vokser eller skrumper — en faldende profil er et stærkt signal om et straffet eller forladt site. Kan automatiseres via Ahrefs MCP (nu på Lite) — tjekkes i øjeblikket manuelt for shortlistede domæner.</td>
               </tr>
               <tr>
                 <td><strong><span class="t-en">Prior link to destination</span><span class="t-da">Tidligere link til destination</span></strong></td>
                 <td><span class="status-pill pill-manual">! Manual check</span></td>
-                <td class="t-en">Cannot query backlinks programmatically without MCP connection — check manually for approved domains</td>
-                <td class="t-da">Kan ikke forespørge backlinks programmatisk uden MCP-forbindelse — tjek manuelt for godkendte domæner</td>
+                <td class="t-en">Automatable via Ahrefs MCP — currently checked manually for approved domains only</td>
+                <td class="t-da">Kan automatiseres via Ahrefs MCP — tjekkes i øjeblikket manuelt kun for godkendte domæner</td>
               </tr>
             </tbody>
           </table>
@@ -544,8 +544,8 @@
 
         <div class="callout-note amber fade-up">
           <strong><span class="t-en">On the three manual checks:</span><span class="t-da">Om de tre manuelle tjek:</span></strong>
-          <span class="t-en"> Traffic trend, keyword ranking trend, and prior link checks only matter for domains that survive the hard filters — typically 3–5 out of 20. Verifying those manually takes under 5 minutes. The tool's job is to eliminate the obvious rejects so that manual effort is spent only where it counts.</span>
-          <span class="t-da"> Trafik-trend, søgeordsrankering-trend og prior link-tjek er kun relevante for domæner, der overlever de hårde filtre — typisk 3–5 ud af 20. At verificere disse manuelt tager under 5 minutter. Værktøjets opgave er at eliminere de åbenlyse afvisninger, så manuel indsats kun bruges, hvor det tæller.</span>
+          <span class="t-en"> Traffic trend, keyword ranking trend, and prior link checks only matter for domains that survive the hard filters — typically 3–5 out of 20. Verifying those manually takes under 5 minutes. All three are automatable via Ahrefs MCP (now available from Lite subscriptions) and are candidates for a V3 layer. For now: manual effort only where it counts.</span>
+          <span class="t-da"> Trafik-trend, søgeordsrankering-trend og prior link-tjek er kun relevante for domæner, der overlever de hårde filtre — typisk 3–5 ud af 20. At verificere disse manuelt tager under 5 minutter. Alle tre kan automatiseres via Ahrefs MCP (nu tilgængeligt fra Lite-abonnementer) og er kandidater til et V3-lag. For nu: manuel indsats kun, hvor det tæller.</span>
         </div>
 
       </div>
@@ -618,8 +618,8 @@
         </div>
 
         <div style="max-width:720px;" class="fade-up">
-          <p class="t-en">The tool runs across two live layers. V1 is publicly available — deterministic, no API needed. V2 adds the qualitative layer that metrics alone can't handle, and is live behind a password. A third layer is a future concept: a live Ahrefs connection that would close the three checks that currently require a quick manual verification.</p>
-          <p class="t-da">Værktøjet kører i to live lag. V1 er offentligt tilgængeligt — deterministisk, ingen API nødvendig. V2 tilføjer det kvalitative lag, som metrikker alene ikke kan håndtere, og er live bag en adgangskode. Et tredje lag er et fremtidigt koncept: en live Ahrefs-forbindelse, der ville lukke de tre punkter, der i øjeblikket kræver hurtig manuel verifikation.</p>
+          <p class="t-en">The tool runs across two live layers. V1 is publicly available — deterministic, no API needed. V2 adds the qualitative layer that metrics alone can't handle, and is live behind a password. A third layer is in consideration: a live Ahrefs MCP connection (now available from Lite subscriptions) that would close the checks that currently require manual verification and give Claude real keyword data instead of domain-name inference.</p>
+          <p class="t-da">Værktøjet kører i to live lag. V1 er offentligt tilgængeligt — deterministisk, ingen API nødvendig. V2 tilføjer det kvalitative lag, som metrikker alene ikke kan håndtere, og er live bag en adgangskode. Et tredje lag overvejes: en live Ahrefs MCP-forbindelse (nu tilgængeligt fra Lite-abonnementer) der ville lukke de tjek, der i øjeblikket kræver manuel verifikation, og give Claude rigtige søgeordsdata i stedet for domænenavns-inference.</p>
         </div>
 
         <div class="version-row fade-up">
@@ -660,8 +660,8 @@
             </div>
             <div class="version-tag v3">V3 — Ahrefs MCP</div>
             <h4><span class="t-en">Live data, closed blind spots</span><span class="t-da">Live data, lukkede blinde vinkler</span></h4>
-            <p class="t-en">A live Ahrefs connection via MCP would replace the static CSV export with real-time data, closing the three checks that currently require manual verification. Requires an Ahrefs Enterprise subscription — not actively in development.</p>
-            <p class="t-da">En live Ahrefs-forbindelse via MCP ville erstatte det statiske CSV-eksport med realtidsdata og lukke de tre punkter, der i øjeblikket kræver manuel verifikation. Kræver et Ahrefs Enterprise-abonnement — ikke aktivt under udvikling.</p>
+            <p class="t-en">A live Ahrefs connection via MCP would replace the static CSV export with real-time data, closing the checks that currently require manual verification. Ahrefs MCP is now available from Lite subscriptions — in consideration for development.</p>
+            <p class="t-da">En live Ahrefs-forbindelse via MCP ville erstatte det statiske CSV-eksport med realtidsdata og lukke de tjek, der i øjeblikket kræver manuel verifikation. Ahrefs MCP er nu tilgængeligt fra Lite-abonnementer — overvejes til udvikling.</p>
             <ul class="version-list">
               <li><span class="t-en">6-month traffic trend — catch recovering and collapsing sites</span><span class="t-da">6-månederstrend — fang genoprettende og kollapsende sites</span></li>
               <li><span class="t-en">Keyword ranking trend — flag shrinking keyword profiles before ordering</span><span class="t-da">Søgeordsrankering-trend — markér skrumpende søgeordsprofiler inden bestilling</span></li>
